@@ -5,11 +5,11 @@ Startup project for BYU CS 260
 
 ### Elevator Pitch ###
 In today's world, there is so much media being produced that it can be hard to keep up! Big corporations are pumping out TV shows and movies 
-at an astonishing rate, with most of them being cheap cash grabs or bloated spin-offs. However, in today's world time is valuable. Who has the 
-time to sort through everything ever made to try and find something new to watch? My startup, Simply Cinema, aims to help you sort 
-through the sea of mediocrity with the help of your friends. Whenever you or your friend watches something new you can add its data to the 
-database, which is then instantly shared with everyone. You can give the show or movie a description, rating, and leave comments. You can find 
-new recommended shows to watch, or warn your friends about a movie that's not worth their time. The power is in your hands with Simply Cinema!
+at an astonishing rate, with most of them being cheap cash grabs or bloated spin-offs. Who has the time to sort through everything ever made 
+to try and find something new to watch? My startup, Simply Cinema, aims to help you sort through the sea of mediocrity with the help of your 
+friends. Whenever you or your friend watches something new you can add its data to the database, which is then instantly shared with everyone. 
+You can give the show or movie a description, rating, and leave comments. You can find new recommended shows to watch, or warn your friends 
+about a movie that's not worth their time. The power is in your hands with Simply Cinema!
 
 ### Proof-of-Concept Design ###
 ![Login Page](loginPage.png)
@@ -27,13 +27,13 @@ new recommended shows to watch, or warn your friends about a movie that's not wo
 ### Technologies ###
 I am going to use the required technologies in the following ways:
 
-- **HTML:** Uses correct HTML structure with two HTML pages. One is used for loging in/registering, while the other is used for creating movie/
-show descriptions and rating/commenting on them.
+- **HTML:** Uses correct HTML structure with three HTML pages. One for logging in/registering, one for creating movie/show descriptions, and one for creating comments and ratings.
 - **CSS:** Adaptable to different screen sizes with a simple, minimal design. Good use of color, contrast, and whitespace.
 - **JavaScript:** Provides login/registration, movie/show selection, creating movie/show descriptions, creating movie/show comments and 
 ratings, backend endpoint calls.
 - **React:** Single page application, with views componentized and dynamic updates in response to user actions.
 - **Web Service:** Backend service with endpoints for:
+  - Login
   - Retrieving movie/show list
   - Retrieving individual movie/show
   - Retrieving comment and rating list for movie/show
