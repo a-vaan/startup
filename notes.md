@@ -10,4 +10,4 @@
 
 ### EC2 Notes ###
 - Public IP address: http://44.219.229.13/
-- SSH command to get into prod server from the CS 260 folder: ssh -i Production.pem ubuntu@3.91.208.29
+- SSH command to get into prod server from the CS 260 folder: ssh -i Production.pem ubuntu@simplycinema.click
