@@ -16,8 +16,8 @@
       <nav>
         <menu>
           <li><a href="index.html">Login</a></li>
-          <li><a href="create.html">Create Description</a></li>
-          <li><a href="comment.html">Leave a Comment</a></li>
+          <li><a href="create.html">Create New TV Show/Movie</a></li>
+          <li><a href="comment.html">Create Description and Leave a Comment</a></li>
         </menu>
       </nav>
       <hr />
@@ -45,6 +45,11 @@
         <form action="comment.html" method="get">
           <input type="text" placeholder="Comment Here">
           <button type="submit">Submit New Comment</button>
+        </form>
+        <form action="comment.html" method="get"></form>
+          <label for="rating">Rating (between 0 and 5):</label>
+          <input type="range" id="rating" name="rating" min="0" max="5">
+          <button type="submit">Submit Rating</button>
         </form>
       </div>
     </main>
