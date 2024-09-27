@@ -47,3 +47,8 @@ ratings, backend endpoint calls.
 For this deliverable I built out the structure of my application using HTML.
 
 - **HTML Pages:** Three HTML pages that represent the ability to login, read and create shows, and read and create descriptions/comments
+- **Links:** The login, create, and comment pages all link to each other through the header. Also added link to the startup GitHub page on the footer.
+- **Text:** Text is used in the place of many services that will be added in later. Examples include the quote on the login page that will be replaced with a call to an API, as well as all the comment, description, and movie data that comes from the database.
+- **Images:** Two images were added to the login page.
+- **DB/Login:** Input box and submit button for login. The username is displayed once the user is signed in, represented by the user name in the create page. Input box and submission buttons also for creating a new show/movie, a new description, a new comment, and a new rating, all of which will be put in the database. The list of movies and comments represent data pulled from the database.
+- **WebSocket:** The fully populated lists of both comments and movies/shows represents the data that will be updated in real time whenever a new one is created.
