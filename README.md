@@ -42,3 +42,8 @@ ratings, backend endpoint calls.
   - Creating new comment and rating
 - **DB/Login:** Store users, movie/show descriptions, and movie/show comments/ratings in database. Register and login users. Credentials securely stored in database. Cannot access the media/comments page unless logged in.
 - **WebSocket:** Whenever a new movie/show or comment and rating is added, all other users are updated with that information.
+
+## HTML Deliverable ##
+For this deliverable I built out the structure of my application using HTML.
+
+- **HTML Pages:** Three HTML pages that represent the ability to login, read and create shows, and read and create descriptions/comments
