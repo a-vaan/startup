@@ -40,21 +40,29 @@
         <h1>Welcome to Simply Cinema!</h1>
         <h3>"If you forced someone to do something they didn’t want to do, they’d just end up hating life."</h3>
         <h4>- Chihiro Sengoku, Sakurasou no Pet na Kanojo</h4>
-        <img src="film_pic_1.jpg" alt="Film Pic 1">
-        <img src="film_pic_2.jpg" alt="Film Pic 2">
+        <div class="row align-items-center justify-content-end"> 
+          <div class="col-md-6"> 
+            <img src="film_pic_1.jpg" alt="Film Pic 1" class="img-fluid"> 
+          </div> 
+        </div>
+        <div class="row align-items-center justify-content-start"> 
+          <div class="col-md-6"> 
+            <img src="film_pic_2.jpg" alt="Film Pic 2" class="img-fluid"> 
+          </div> 
+        </div>
       </div>
 
       <div>
       <form method="get" action="create.html">
-        <div>
-          <input type="text" placeholder="Username" />
+        <div class="input-group mb-3">
+          <input class="form-control" type="text" placeholder="Username" />
+        </div>
+        <div class="input-group mb-3">
+          <input class="form-control" type="password" placeholder="Password" />
         </div>
         <div>
-          <input type="password" placeholder="Password" />
-        </div>
-        <div>
-          <button type="submit">Login</button>
-          <button type="submit">Register</button>
+          <button type="submit" class="btn btn-primary">Login</button>
+          <button type="submit" class="btn btn-secondary">Register</button>
         </div>
       </form>
     </main>
