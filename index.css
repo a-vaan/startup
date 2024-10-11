@@ -1,0 +1,23 @@
+.picture-box {
+    height: calc(100px + 1em);
+    margin-bottom: 1em;
+    padding: 0.5em;
+    background: rgb(86, 89, 93);
+    border-radius: 5px;
+  }
+
+.picture-form {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    gap: 100px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.top-banner {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    /* margin-bottom: auto; */
+}
