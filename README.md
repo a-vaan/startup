@@ -58,7 +58,7 @@ For this deliverable I properly styled the application into its final appearance
 
 - **Header, footer, and main content body:** All have been styled and formatted.
 - **Navigation elements:** Underlines have been removed, and the process has been streamlined. There is no longer a link to the description/comments page from the top navigation bar. This allows the formatting of the top bar to flex better, as well as reduce confusion for the user when the app is fully complete. To get to the description/comments page, click on any of the movie/tv show titles on the "Movies/TV Shows" page.
-- **Responsive to window resizing:** I've checked my app on all the different screens I could, and it looks good on all of them!
+- **Responsive to window resizing:** I've checked my app on all the different screens I could, and it looks good on all of them! To make the login screen formatting work, I had to make the pictures disappear after it gets to a certain width. Additionally, the orientation of the description and comments goes from horizontal to vertical as the screen gets narrower.
 - **Application elements:** All the parts of my application are there, and I tried my best to make good use of spacing so as to not make it feel too cluttered.
 - **Application text content:** Consistent fonts and formatting throughout the whole application.
 - **Application images:** The 2 images on the login page have been formated and spaced accordingly. When the window gets too narrow and the pictures start to cause formatting issues, they disappear so as to not hinder the user experience. 
