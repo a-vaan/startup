@@ -8,6 +8,7 @@
     <link rel="icon" href="favicon.ico" />
 
     <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="comment.css" />
 
     <!-- Include bootstrap CSS framework -->
     <link
@@ -36,33 +37,38 @@
     </header>
 
     <main class="container-fluid bg-secondary text-center">
-      <h2>Star Wars</h2>
-      <h4>Rating: 4.5/5</h4>
-      <div>
-        <h4>Description:</h4>
-        <p>Star Wars is a multimedia space opera that combines science fiction and fantasy elements to create a universe with a variety of stories</p>
-        <form action="comment.html" method="get">
-          <input type="text" placeholder="Description Here">
-          <button type="submit">Submit New Description</button>
-        </form>
+      <div class="title">
+        <h2>Star Wars</h2>
+        <h4>Rating: 4.5/5</h4>
       </div>
 
-      <div>
-        <h4>Comments:</h4>
-        <ul>
-          <li>It's great!</li>
-          <li>It's kinda overrated...</li>
-          <li>Luke is so cool!</li>
-        </ul>
-        <form action="comment.html" method="get">
-          <input type="text" placeholder="Comment Here">
-          <button type="submit">Submit New Comment</button>
-        </form>
-        <form action="comment.html" method="get"></form>
-          <label for="rating">Rating (between 0 and 5):</label>
-          <input type="range" id="rating" name="rating" min="0" max="5">
-          <button type="submit">Submit Rating</button>
-        </form>
+      <div class="main-body">
+        <div class="description">
+          <h4>Description:</h4>
+          <p>Star Wars is a multimedia space opera that combines science fiction and fantasy elements to create a universe with a variety of stories</p>
+          <form action="comment.html" method="get">
+            <input type="text" placeholder="Description Here">
+            <button type="submit">Submit New Description</button>
+          </form>
+        </div>
+
+        <div class="comments">
+          <h4>Comments:</h4>
+          <ul>
+            <li>It's great!</li>
+            <li>It's kinda overrated...</li>
+            <li>Luke is so cool!</li>
+          </ul>
+          <form action="comment.html" method="get">
+            <input type="text" placeholder="Comment Here">
+            <button type="submit">Submit New Comment</button>
+          </form>
+          <form action="comment.html" method="get"></form>
+            <label for="rating">Rating (between 0 and 5):</label>
+            <input type="range" id="rating" name="rating" min="0" max="5">
+            <button type="submit">Submit Rating</button>
+          </form>
+        </div>
       </div>
     </main>
 

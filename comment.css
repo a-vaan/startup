@@ -1,0 +1,13 @@
+.main-body {
+    display: flex;
+}
+
+.description {
+    flex: 1;
+    background-color: black;
+}
+
+.comments {
+    flex: 1;
+    background-color: brown;
+}
