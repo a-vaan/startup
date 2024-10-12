@@ -1,13 +1,35 @@
+.title {
+    display: flex;
+    flex: 0 80px;
+    flex-direction: column;
+    padding-bottom: 50px;
+}
+
 .main-body {
     display: flex;
 }
 
 .description {
+    display: flex;
     flex: 1;
+    flex-direction: column;
     background-color: black;
 }
 
 .comments {
+    display: flex;
     flex: 1;
+    flex-direction: column;
     background-color: brown;
 }
+
+.submit-comment {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (orientation: portrait) {
+    .main-body {
+      flex-direction: column;
+    }
+  }

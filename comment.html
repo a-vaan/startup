@@ -30,9 +30,7 @@
             <a class="nav-link active" href="index.html">Login</a></li>
           <li class="nav-item">
             <a class="nav-link" href="create.html">TV Shows/Movies</a></li>
-          <li li class="nav-item">
-            <a class="nav-link" href="comment.html">Create Description and Leave a Comment</a></li>
-        </menu>
+          </menu>
       </nav>
     </header>
 
@@ -47,8 +45,8 @@
           <h4>Description:</h4>
           <p>Star Wars is a multimedia space opera that combines science fiction and fantasy elements to create a universe with a variety of stories</p>
           <form action="comment.html" method="get">
-            <input type="text" placeholder="Description Here">
-            <button type="submit">Submit New Description</button>
+            <input class="form-control" maxlength="4" size="4" type="text" placeholder="Description Here">
+            <button type="submit" class="btn btn-primary">Submit New Description</button>
           </form>
         </div>
 
@@ -59,14 +57,16 @@
             <li>It's kinda overrated...</li>
             <li>Luke is so cool!</li>
           </ul>
-          <form action="comment.html" method="get">
-            <input type="text" placeholder="Comment Here">
-            <button type="submit">Submit New Comment</button>
-          </form>
+          <div class="submit-comment">
+            <form action="comment.html" method="get">
+              <input class="form-control" type="text" placeholder="Comment Here">
+              <button type="submit" class="btn btn-primary">Submit New Comment</button>
+            </form>
+          </div>
           <form action="comment.html" method="get"></form>
             <label for="rating">Rating (between 0 and 5):</label>
             <input type="range" id="rating" name="rating" min="0" max="5">
-            <button type="submit">Submit Rating</button>
+            <button type="submit" class="btn btn-primary">Submit Rating</button>
           </form>
         </div>
       </div>
