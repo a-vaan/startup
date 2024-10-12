@@ -40,9 +40,10 @@
         User:
         <span class="user-name">User's Name</span>
       </div>
+
       <div>
-        <table>
-          <thead>
+        <table class="table table-warning table-striped-columns">
+          <thead class="table-dark" >
             <tr>
               <th>Show/Movie List</th>
             </tr>
@@ -74,10 +75,13 @@
             </tr>
           </tbody>
         </table>
-        <form action="comment.html" method="get">
-          <input type="text" placeholder="TV Show/Movie" />
-          <button type="submit">Add New TV Show/Movie</button>
-        </form>
+
+        <div class="form-group row">
+          <form action="comment.html" method="get">
+            <input class="form-control" style="text-align: center" type="text" placeholder="TV Show/Movie" />
+            <button type="submit" class="btn btn-primary">Add New TV Show/Movie</button>
+          </form>
+        </div>
       </div>
     </main>
 
