@@ -12,8 +12,8 @@ You can give the show or movie a description, rating, and leave comments. You ca
 about a movie that's not worth their time. The power is in your hands with Simply Cinema!
 
 ### Proof-of-Concept Design ###
-![Login Page](loginPage.png)
-![Home Page](homePage.png)
+![Login Page](images/loginPage.png)
+![Home Page](images/homePage.png)
 
 ### Key Features ###
 - Secure login over HTTPS
@@ -52,3 +52,13 @@ For this deliverable I built out the structure of my application using HTML.
 - **Images:** Two images were added to the login page.
 - **DB/Login:** Input box and submit button for login. The username is displayed once the user is signed in, represented by the user name in the create page. Input box and submission buttons also for creating a new show/movie, a new description, a new comment, and a new rating, all of which will be put in the database. The list of movies and comments represent data pulled from the database.
 - **WebSocket:** The fully populated lists of both comments and movies/shows represents the data that will be updated in real time whenever a new one is created.
+
+## CSS Deliverable ##
+For this deliverable I properly styled the application into its final appearance.
+
+- **Header, footer, and main content body:** All have been styled and formatted.
+- **Navigation elements:** Underlines have been removed, and the process has been streamlined. There is no longer a link to the description/comments page from the top navigation bar. This allows the formatting of the top bar to flex better, as well as reduce confusion for the user when the app is fully complete. To get to the description/comments page, click on any of the movie/tv show titles on the "Movies/TV Shows" page.
+- **Responsive to window resizing:** I've checked my app on all the different screens I could, and it looks good on all of them!
+- **Application elements:** All the parts of my application are there, and I tried my best to make good use of spacing so as to not make it feel too cluttered.
+- **Application text content:** Consistent fonts and formatting throughout the whole application.
+- **Application images:** The 2 images on the login page have been formated and spaced accordingly. When the window gets too narrow and the pictures start to cause formatting issues, they disappear so as to not hinder the user experience. 
