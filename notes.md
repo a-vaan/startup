@@ -1,18 +1,18 @@
 # Notes for BYU CS 260 #
 
-### GitHub Notes ###
+## GitHub Notes ##
 - Make sure to commit frequently and consistantly. Stay ahead of assignments in order to keep up with the class.
 - Here's a link to my [README.md](https://github.com/a-vaan/startup/blob/main/README.md) file
 
-### Technology stack ###
+## Technology stack ##
 - The collection of technologies used to create or deliver a web application is called a technology stack. It is a stack because they usually layer on top of one another.
 - Dependability, support, scalability, performance, and security are all important factors when it comes to developing a technology stack
 
-### EC2 Notes ###
+## EC2 Notes ##
 - Public IP address: http://44.219.229.13/
 - SSH command to get into prod server from the CS 260 folder: ssh -i Production.pem ubuntu@simplycinema.click
 
-### JS Promises ###
+## JS Promises ##
 The rendering process of your HTML executes on a single thread. That means that you cannot take a long time processing JavaScript on the main rendering thread. Long running, or blocking tasks, should be executed with the use of a JavaScript Promise. The execution of a promise allows the main rendering thread to continue while some action is executed in the background. You create a promise by calling the Promise object constructor and passing it an executor function that runs the asynchronous operation. Executing asynchronously means that promise constructor may return before the promise executor function runs. The state of the promise execution is always in one of three possible states.
 
 1. pending - Currently running asynchronously
