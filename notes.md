@@ -108,7 +108,7 @@ The VS Code Live Server extension is great for building web applications. You ar
 
 To install the Live Server extension, open up VS Code and follow these three steps.
 
-Congratulations! You have joined the 38 million other users already enjoying this extension. You can test it by opening VS Code, creating a new file named index.html and pasting <h1>hello<h1> into the file. Then save the file and press the Go Live button. This will launch your browser and display the rendered index.html file. If you make changes to your file and save it, the browser will automatically be updated to display your changes.
+Congratulations! You have joined the 38 million other users already enjoying this extension. You can test it by opening VS Code, creating a new file named index.html and pasting `<h1>hello<h1>` into the file. Then save the file and press the Go Live button. This will launch your browser and display the rendered index.html file. If you make changes to your file and save it, the browser will automatically be updated to display your changes.
 
 ### GitLens ###
 The basic support that VS Code offers for working with Git is sufficient for most tasks, but if you really want to unleash the power of git, consider installing the GitLens extension. It makes reviewing the commit history, stashing, merging, and comparing so much easier. With over 25 million users, you might enjoy joining the party.
@@ -1036,6 +1036,7 @@ Notice that the rendered document has almost no styling. That is because the ent
 ### Common elements ###
 Modern HTML contains over 100 different elements. Here is a short list of HTML elements that you will commonly see.
 
+```
 element	meaning
 html	The page container
 head	Header information
@@ -1070,6 +1071,7 @@ audio	Audio content
 video	Video content
 svg	Scalable vector graphic content
 iframe	Inline frame of another HTML page
+```
 
 ### Comments ###
 You can include comments in your HTML files by starting the comment with <!-- and ending it with -->. Any text withing a comment block will be completely ignored when the browser renders it.
@@ -1081,6 +1083,7 @@ You can include comments in your HTML files by starting the comment with <!-- an
 ### Special characters ###
 HTML uses several reserved characters for defining its file format. If you want to use those characters in your content then you need to escape them using the entity syntax. For example, to display a less than symbol (<) you would instead use the less than entity (&lt;). You can also use the entity syntax to represent any unicode character.
 
+```
 Character	Entity
 &	&amp;
 <	&lt;
@@ -1088,16 +1091,19 @@ Character	Entity
 "	&quot;
 '	&apos;
 😀	&#128512;
+```
 
 ### HTML Versions ###
 Understanding when different HTML features were introduced helps you know what has been around for a long time and probably supported by all browsers, and what is new and may not work everywhere. HTML is pretty stable, but it is still good to check a website like MDN or canIUse to make sure.
 
+```
 Year	Version	Features
 1990	HTML1	format tags
 1995	HTML2	tables, internationalization
 1997	HTML3	MathML, CSS, frame tags
 1999	HTML4	external CSS
 2014	HTML5	email, password, media, and semantic tags
+```
 
 ### index.html ###
 By default a web server will display the HTML file named index.html when a web browser, such as Google Chrome, makes a request without asking for a specific HTML file. For example, when you ask for https://google.com in your web browser you will actually get back the HTML for the file https://google.com/index.html. For this reason, it is very common to name the main HTML file for your web application index.html.
