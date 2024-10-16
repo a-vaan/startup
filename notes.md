@@ -1,6 +1,159 @@
 # Notes for BYU CS 260 #
 
-## GitHub Notes ##
+## The Console ##
+
+Before the creation of graphical user interfaces, all computing systems were simple console environments consisting as of a prompt for inputting a command and the display of the command output. All of the original programming tools ran as console application. The console tradition is still actively used by professional developers and most programming tools execute within a console window.
+
+Also known as the command line, shell, or terminal, the console window is an essential web development tool. The console provides access to the file system and allows for the execution of command line applications.
+
+There are many console applications that you can chose from. All operating systems come with a default console, but you will probably want to install one in order to get the best experience. Here is an example of Warp running on a Mac.
+
+### Make sure you have a console application ###
+In order for you to successfully use the console for web programming it must be POSIX compliant. POSIX compliance means that it supports a standard set of console commands. Both Mac and Linix support POSIX. That means any necessary console commands will work on those operating systems.
+
+### Getting a console application for Windows ###
+If you are using Microsoft Windows you can get a reasonable approximation of a POSIX compliant console by installing Git Bash. When installing, use all the default settings.
+
+Once it is installed, hit the Windows button on your keyboard, and type Git Bash. This should open a console window that looks something like the following. Make sure you look for the Git Bash icon so that you don't accidentally use an non-POSIX compatible console application.
+
+⚠ Do not use Git Command, cmd, or Powershell. That will not work for the commands and scripts we run in this class.
+
+You can use Windows Subsystem for Linux (WSL) (e.g Ubuntu on Windows) for your work in this class, but you must be very careful to do all of your work actually within WSL. Don't download files to your Windows partition and then access them from WSL. It is suggested that you use Git Bash instead of WSL, unless you are really familiar with WSL.
+
+### Testing your console application ###
+Once you have a acceptable console application on your development computer, open it up and make sure you can run a simple POSIX compliant command such as printf 'hello\n'.
+
+If this displays hello then you are on the right track. If that doesn't work then you are using a console application that is not POSIX compliant. For example, Windows Powershell will not work.
+
+### Viewing the file system ###
+One of the primary purposes of a console application is to view the files on the computer. The files on a computer are organized into a tree structure of nodes called directories. At any given point in time your console is located at one of the directories in the file system. You can see which directory you are in with the pwd (present working directory) command.
+
+```
+➜  pwd
+
+/Users/student/byu//webprogramming260
+```
+You can list all of the files in the directory with ls (list files). Most command line applications take parameters that are specified after you type the application name. For example, ls can list all files (even hidden ones) in a long format if you provide the parameter -la.
+
+```
+➜ ls -la
+
+total 16
+-rw-r--r--  1 lee  staff   1.0K Nov 19 08:47 LICENSE
+-rw-r--r--  1 lee  staff    82B Nov 19 08:47 README.md
+drwxr-xr-x  4 lee  staff   128B Nov 19 08:48 profile
+drwxr-xr-x  4 lee  staff   128B Nov 19 08:47 react
+```
+
+### Executing commands ###
+The other primary purpose of the console is to execute commands. You already did this in the previous section when you executed commands for working with the file system. However, console commands can perform many different operations. Here are some basic commands that you show experiment with.
+
+- echo - Output the parameters of the command
+- cd - Change directory
+- mkdir - Make directory
+- rmdir - Remove directory
+- rm - Remove file(s)
+- mv - Move file(s)
+- cp - Copy files
+- ls - List files
+- curl - Command line client URL browser
+- grep - Regular expression search
+- find - Find files
+- top - View running processes with CPU and memory usage
+- df - View disk statistics
+- cat - Output the contents of a file
+- less - Interactively output the contents of a file
+- wc - Count the words in a file
+- ps - View the currently running processes
+- kill - Kill a currently running process
+- sudo - Execute a command as a super user (admin)
+- ssh - Create a secure shell on a remote computer
+- scp - Securely copy files to a remote computer
+- history - Show the history of commands
+- ping - Check if a website is up
+- tracert - Trace the connections to a website
+- dig - Show the DNS information for a domain
+- man - Look up a command in the manual
+- You can also chain the input and output of commands using special characters
+
+- | - Take the output from the command on the left and pipe, or pass, it to the command on the right
+- > - Redirect output to a file. Overwrites the file if it exists
+- >> - Redirect output to a file. Appends if the file exists
+For example, you can list the files in a directory, pipe it into grep to search for files created in Nov, and then pipe that into wc to count the number of files found with a date of Nov.
+
+```
+ls -l | grep ' Nov ' | wc -l
+```
+There are also keystrokes that have special meaning in the console.
+
+- CTRL-R - Use type ahead to find previous commands
+- CTRL-C - Kill the currently running command
+
+
+
+## Editors ##
+The code editor is the workspace of a web application developer. Deeply learning an editor that makes you efficient and flexible will pay significant dividends in your ability to deliver quality work and greatly reduce frustration. A good editor should feel like a friend. If you are constantly arguing with your editor, then perhaps you need a relationship adjustment.
+
+For your work with this instruction I would highly suggest you use two editors. The first one, Visual Studio Code, is your main editor for daily coding activities. The second one, is VI. You will use VI when you are shelled into your production environment and need a simple, but powerful, console based editor for quickly editing text files.
+
+### Visual Studio Code ###
+Created by Microsoft, Visual Studio Code (VS Code), is free and supported by a large community of open source developers. The 2021 Stack Overflow developer survey put VS Code as the number one most common IDE, used by 71% of professional developers.
+
+VS Code is both simple to use, incredibly flexible, and powerful. At its most basic level it represents files in a given directory on the left and a space on the right for editing files. VS Code then adds excellent Git support, auto-formatting, auto-suggestions, and debugging support for JavaScript right out of the box. You can easily install language server extensions for most major programming languages that provide coding, building, and debugging support. From there you have your choice of thousands of extensions to add whatever functionality you would like. This includes extensions such as an auto-reloading HTTP server for hosting your project code locally in a browser, an image editor, a spell checker, hex editor, testing frameworks, linters, code prettier, or even docker container management to compartmentalize your development of different projects.
+
+So unless you are already a master of some other development environment, it is highly suggested you go and install VS Code right now.
+
+### Live Server extension ###
+The VS Code Live Server extension is great for building web applications. You are going to build a lot of HTML, CSS, and JavaScript. You can do much of this on CodePen, but for your projects you are going to be working in your development environment. This means you will have a GitHub repository cloned to your personal development computer. When you open VS Code to the directory where your repository is located you can start creating HTML, CSS, and JavaScript, but when you want to see your code working you need to actually run a web server to deliver your files to the browser. That is where the Live Server extension comes in handy. With the press of the Go Live button on the bottom right status bar, your entire project directory is served up through your browser. Additionally, if you make any changes to a file the browser will automatically be updated.
+
+To install the Live Server extension, open up VS Code and follow these three steps.
+
+Congratulations! You have joined the 38 million other users already enjoying this extension. You can test it by opening VS Code, creating a new file named index.html and pasting <h1>hello<h1> into the file. Then save the file and press the Go Live button. This will launch your browser and display the rendered index.html file. If you make changes to your file and save it, the browser will automatically be updated to display your changes.
+
+### GitLens ###
+The basic support that VS Code offers for working with Git is sufficient for most tasks, but if you really want to unleash the power of git, consider installing the GitLens extension. It makes reviewing the commit history, stashing, merging, and comparing so much easier. With over 25 million users, you might enjoy joining the party.
+
+### VI ###
+VI, or technically vim, is one of the oldest console editors. It is extremely powerful and some incredibly talented software engineers use it as their sole development environment. The reason why you should learn VI is that it is available on every Linux server and can do anything that you will need. With that said it has a bit of an initial learning curve. However, once you have memorized a few basic commands you will be able to get around easily. If you take some time to really learn VI, you might find a new essential tool.
+
+There are lots of tutorials for VI. Here are a few based on how you like to learn.
+
+Additionally, the following instructions walk you through the basics and give you a few important commands to get started.
+
+To use VI, open your console and change directory to one that holds some code you want to work on. For example, if you wanted to edit index.html you would type:
+
+```
+vi index.html
+```
+
+What you will immediately notice is that there is no menu bar or navigation aids. Instead, VI works entirely by keyboard commands. There are two modes in VI, command mode and insert mode. When you open VI, you are in command mode and all of the command keystrokes will work. To edit a document, use the command i to enter insert mode. Now your keystrokes will modify the document. To exit insert mode and type commands again, press ESC. Type :q from command mode (yes, you have to type the colon) to quit VI when you're done.
+
+The following short list of commands should allow you to do most of what you will ever want to do.
+
+keystroke	meaning
+- :h	help
+- i	enter insert mode. This will allow you to type and delete text. Use ESC to exit insert mode. No other commands will work while in insert mode.
+- u	undo
+- CTRL-r	redo
+- gg	go to beginning of file
+- G	go to end of file
+- /	search for text that you type after /
+- n	next search match
+- N	previous search match
+- v	visually select text
+- y	yank or copy selected text to clipboard
+- p	paste clipboard
+- CTRL-wv	Split window vertically
+- CTRL-ww	Toggle windows
+- CTRL-wq	Close current window
+- :e	Open a file. Type ahead available. If you open a directory you can navigate it in the window
+- :w	write file (save)
+- :q	quit. Use :q! to exit without saving
+The great thing about learning these commands is that you will find that they work with a lot of the POSIX console programs. For example, with the file viewing utility less you can use gg and G to jump to the top and bottom of a file. Here is a cheat sheet if you want to see all the commands.
+
+
+
+## GitHub ##
 - Make sure to commit frequently and consistantly. Stay ahead of assignments in order to keep up with the class.
 - Here's a link to my [README.md](https://github.com/a-vaan/startup/blob/main/README.md) files
 
@@ -562,6 +715,122 @@ Note that your elastic IP address is allocated until your release it, not until 
 
 ### What size of server should you use? ###
 The t3.nano instance size has just enough memory and CPU to meet the requirements of this course if you are careful. However, if you find that your server is running slowly or erratically, you should consider upgrading to a larger instance size. If you have an elastic IP address you can change your instance size whenever you would like and you won't lose your public IP address. You can even stop your server when no one is using it. This is useful because you don't get charged for your server when it is stopped.
+
+
+
+## Amazon Web Services - Route 53 ##
+Referring to a web server by its IP address is fine for development, but it is not going to work for most users. Additionally, you want to create a secure (HTTPS) connection to your application, and that is not possible with just an IP address. Instead you want to use a domain name to represent your web application. That way you can make it easy to remember and secure. In order for you to do this you need to buy a domain name, and then create DNS records with a DNS (Domain Name System) server.
+
+Route 53 is the AWS service that handles everything DNS-related. With Route 53 you can buy a domain name, host your domain on their DNS servers, and create DNS records.
+
+⚠ You should already have an account with AWS from your work to rent a EC2 server instance. If you haven't done that work, go create your account and server following the previous instruction.
+
+### Purchasing a domain name ###
+AWS provides extensive documentation for all their services. You can find the documentation for registering a new domain on their website. You may find the simplified directions below easier to follow, but if you run into trouble, or have additional questions, refer to the official documentation. Remember that you are leasing a domain name for a year, and so make sure it is a name that you would like. Also note that AWS credits do not apply to purchase of domain names.
+
+1. Open the AWS console in your browser and log in.
+
+2. Navigate to the Route 53 service.
+
+3. Select the Domains > Registered domains option from the menu on the left.
+
+4. Push the Register Domain option.
+
+5. Select the TLD that you want. AWS currently offers the .click TLD for $3 and .link for $5.
+
+6. Put your desired root domain into the search box and press the Check button to see if it is available. Common one or two word phrases are almost always taken. For example, 260.click is taken, but webprogramming260.click is not. Keep searching until you find one you like.
+
+7. Press Add to cart.
+
+8. Fill out the contact details. This information is sent to the authorized DNS registrar and is what shows up to the world for your domain name. Once registration is complete you can see this information using the console program whois. Make sure you fill in this information correctly. Providing false information may cause the registrar to revoke your registration.
+
+⚠ If you are using new contact information that a registrar has never seen before, it will require you to verify the email address. Usually this means you will receive an email that you must respond to within 30 days. If you fail to do this your domain name will be removed from the registry without warning. Check your spam folder if you do not receive this email.
+
+9. Press Continue.
+
+10. Review everything and press Complete Order
+
+It may take a while before your purchase is completed, but when it is the Route 53 service dashboard will show that you have a hosted zone for your domain name.
+
+### Manage your DNS records ###
+Now that you own a domain name you can use it to create DNS records that will map domain names to IP addresses (A records) or other domain names (CNAME records). For the purposes of this class, you want your root domain name, and any subdomain of your root domain, to map to the IP address of the web server you created previously.
+
+You will need the public IP address for your server. You can get the public IP address by opening the AWS browser console and viewing the details of your server on the EC2 service page.
+
+⚠ Note that the AWS browser console interface changes all the time; the directions below may not match exactly, but similar functionality should be there in some shape or form.
+
+1. Open the AWS console in your browser and log in.
+2. Navigate to the Route 53 service.
+3. Select the Hosted zones option from the menu on the left.
+4. You should see your domain name listed here. If it doesn't then the registration did not complete, or it is still pending. In that case go review the information found under Domains > Pending requests.
+5. Click on your domain name to view the details. This should display existing DNS records with types such as NS, and SOA.
+6. First, create the root domain DNS record. This will associate your domain name with your server's IP address and allow you to use your domain name in the browser to navigate to your server.
+Press the Create record button.
+In the Value box enter the public IP address of your server.
+Press Create records
+A new A type record should appear in your list of records that represents the root domain name and your server's public IP address.
+7. Next we will create a DNS record that will map to your server for any subdomain of your root domain name. This is possible because DNS allows you to specify wildcards for a DNS record.
+Press the Create record button.
+In the Record name box enter the text *. This wildcard represents that any subdomain will match this record, so long as it is not explicitly defined by another DNS record.
+In the Value box enter the public IP address of your server.
+Press Create records
+A new A type record should appear in your list of records that represents the wildcard subdomain name and your server's public IP address.
+
+Your DNS records should look similar to the following when you are done.
+
+By defining both a record for your root domain and a wildcard record for any subdomain of your root domain you can now navigate to your server with either your domain name or a subdomain. For example, if you purchased the domain name myfunkychickens.click you could reach your server by navigating your browser to myfunkychickens.click, simon.myfunkychickens.click, or startup.myfunkychickens.click.
+
+Open your browser and paste your domain in the location bar along with the prefix http://. For example:
+```
+http://myfunkychickens.click
+```
+This should show your web server's default page just like it did when you used the IP address.
+
+Note that your browser will warn you that the website is not secure. We will resolve that in future instruction when we configure Caddy to generate a website certificate for you.
+
+### Other record types ###
+The additional NS and SOA type records that were listed for your domain name are important for working with DNS. These records were created automatically for you when you registered your domain name. The name server (NS) record contains the names of the authoritative name servers that authorize you to place DNS records in this DNS server. Those same authoritative name servers are listed with the registrar that you leased your domain name from. That way the authoritative name server can verify that the DNS records and the DNS registration match and are authorized to represent the domain name when defining DNS records. Otherwise a hacker could just add DNS records and take over your domain name.
+
+The start of authority (SOA) record provides contact information about the owner of this domain name.
+
+
+
+## Caddy ##
+“Imperfect member of the restored Church of Jesus Christ. Husband. Father. Stepdad.”
+
+— Matt Holt (Source: Twitter)
+
+Released in 2020, Matt Holt combined the power of building an HTTP server using the Go programming language with the ease of generating TLS certificates using LetsEncrypt.
+
+Caddy is a web service that listens for incoming HTTP requests. Caddy then either serves up the requested static files or routes the request to another web service. This ability to route requests is called a gateway, or reverse proxy, and allows you to expose multiple web services (i.e. your project services) as a single external web service (i.e. Caddy).
+
+For this course, we use Caddy for the following reasons.
+
+- Caddy handles all of the creation and rotation of web certificates. This allows us to easily support HTTPS.
+- Caddy serves up all of your static HTML, CSS, and JavaScript files. All of your early application work will be hosted as static files.
+- Caddy acts as a gateway for subdomain requests to your Simon and startup application services. For example, when a request is made to simon.yourdomain Caddy will proxy the request to the Simon application running with node.js as an internal web service.
+
+Caddy is preinstalled and configured on your server and so you do not need to do anything specifically with it other than configure your root domain name.
+
+### Important Caddy files ###
+As part of the installation of Caddy we created two links in the Ubuntu user's home directory that point to the key Caddy configuration files. The links were created in the home directory so that you do not have to hunt around your server looking for these files.
+
+- Configuration file: ~/Caddyfile
+
+Contains the definitions for routing HTTP requests that Caddy receives. This is used to determine the location where static HTML files are loaded from, and also to proxy requests into the services you will create later. Except for when you configure the domain name of your server, you should never have to modify this file manually. However, it is good to know how it works in case things go wrong. You can read about this in the Caddy Server documentation.
+
+- HTML files: ~/public_html
+
+This is the directory of files that Caddy serves up when requests are made to the root or your web server. This is configured in the Caddyfile discussed above. If you actually look at the Caddyfile you will see that the static file server is mapped to /usr/share/caddy. That is the location that the file link in the Ubuntu user's home directory, ~/public_html, is pointing to.
+
+```
+:80 {
+      root * /usr/share/caddy
+      file_server
+}
+```
+Therefore, according to this configuration, whenever Caddy receives an HTTP request for any domain name on port 80 it will use the path of the request to find a corresponding file in this directory. For example, a request for http://yourdomainname/index.html will look for a file named index.html in the public_html directory.
+
 
 
 ## JS Promises ##
