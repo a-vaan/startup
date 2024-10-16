@@ -1113,6 +1113,234 @@ You can save any HTML file to your computer's disk and then open the file using 
 
 
 
+## HTML structure elements ##
+The two major purposes of HTML is to provide structure and content to your web application. Some of the common HTML structural elements include body, header, footer, main, section, aside, p, table, ol/ul, div, and span. We demonstrate the use of each element with the following HTML document. It starts with the top level content body. The body has three children, a header, main, and footer. Each of the body children then contains other structural content.
+
+The header contains a paragraph with a span, and a navigation containing multiple divisions of sub-content.
+
+The main contains multiple sections that contain either an unordered list (ul) or a table. Main also contains an aside for content that does not fit the content flow of the sections.
+
+The footer has a content division with a single span.
+
+```
+<body>
+  <p>Body</p>
+  <header>
+    <p>Header - <span>Span</span></p>
+    <nav>
+      Navigation
+      <div>Div</div>
+      <div>Div</div>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <p>Section</p>
+      <ul>
+        <li>List</li>
+        <li>List</li>
+        <li>List</li>
+      </ul>
+    </section>
+    <section>
+      <p>Section</p>
+      <table>
+        <tr>
+          <th>Table</th>
+          <th>Table</th>
+          <th>Table</th>
+        </tr>
+        <tr>
+          <td>table</td>
+          <td>table</td>
+          <td>table</td>
+        </tr>
+      </table>
+    </section>
+    <aside>
+      <p>Aside</p>
+    </aside>
+  </main>
+
+  <footer>
+    <div>Footer - <span>Span</span></div>
+  </footer>
+</body>
+```
+If we rendered this HTML, and added just a bit of styling, so we can see how they related to each other, we would see the following.
+
+Properly representing the page structure using the elements is important not only so it makes logical sense to a programmer, but also so that automated tools like search indexing crawlers and accessibility screen readers can correctly interpret the document.
+
+### Block and inline ###
+There is a distinction between structure elements that are block vs inline. A block element is meant to be a distinct block in the flow of the content structure. An inline element is meant to be inline with the content flow of a block element. In other words, inline elements do not disrupt the flow of a block element's content. For example, the block element div (division) could have an inline element b in order to bring attention to a portion of its sub-text. Likewise a p (paragraph) element could have a span to mark the paragraph's sub-text as a person's name.
+
+```
+<div>He said <b>don't</b> cross the beams.</div>
+
+<p>Authors such as <span>ee cummings</span> often used unconventional structure.</p>
+```
+
+
+
+## HTML input elements ##
+From the very early days of HTML it contained elements for accepting the input of user data. These elements include the following:
+
+```
+Element	Meaning	Example
+form	Input container and submission	<form action="form.html" method="post">
+fieldset	Labeled input grouping	<fieldset> ... </fieldset>
+input	Multiple types of user input	<input type="" />
+select	Selection dropdown	<select><option>1</option></select>
+optgroup	Grouped selection dropdown	<optgroup><option>1</option></optgroup>
+option	Selection option	<option selected>option2</option>
+textarea	Multiline text input	<textarea></textarea>
+label	Individual input label	<label for="range">Range: </label>
+output	Output of input	<output for="range">0</output>
+meter	Display value with a known range	<meter min="0" max="100" value="50"></meter>
+```
+
+### Form element ###
+The main purpose of the form element is to submit the values of the inputs it contains. Before JavaScript was introduced the form container element was essential because it was the only way for the browser to send the input data to a web server as part of a request to process the input and generate a new web page displaying the result of the input. With JavaScript we have much more control over input data and what is done with it. For example, in a single page application the JavaScript will dynamically rebuild the HTML elements to reflect the results of the user interaction. With this ability the data may not even be sent to the server. This greatly reduces the necessity of the form element, but it is often still used simply as a container. Just remember that you are not required to have a form element to use input elements.
+
+Here is an example of a simple form that submits the value of a textarea element.
+
+```
+<form action="submission.html" method="post">
+  <label for="ta">TextArea: </label>
+  <textarea id="ta" name="ta-id">
+Some text
+  </textarea>
+  <button type="submit">Submit</button>
+</form>
+```
+Pressing the submit button sends the following data to the web server. The browser generates the data by combining the textarea's name attribute with the current value of the textarea.
+
+```
+ta-id=Some+text
+```
+
+### Input element ###
+The input element represents many different input types. You set the type of input with the type attribute. There are several different types to choose from. This includes different flavors of textual, numeric, date, and color inputs.
+
+```
+Type	Meaning
+text	Single line textual value
+password	Obscured password
+email	Email address
+tel	Telephone number
+url	URL address
+number	Numerical value
+checkbox	Inclusive selection
+radio	Exclusive selection
+range	Range limited number
+date	Year, month, day
+datetime-local	Date and time
+month	Year, month
+week	Week of year
+color	Color
+file	Local file
+submit	button to trigger form submission
+```
+In order to create an input you specify the desired type attribute along with any other attribute associated with that specific input. Here is an example of a checked radio button and its associated label.
+
+```
+<label for="checkbox1">Check me</label> <input type="checkbox" name="varCheckbox" value="checkbox1" checked />
+```
+Most input elements share some common attributes. These include the following.
+
+```
+Attribute	Meaning
+name	The name of the input. This is submitted as the name of the input if used in a form
+disabled	Disables the ability for the user to interact with the input
+value	The initial value of the input
+required	Signifies that a value is required in order to be valid
+The following shows what the inputs look like when rendered. Don't worry about how clunky they look right out of the box. We will fix that when we start styling things with CSS.
+```
+
+### Validating input ###
+Several of the input elements have validation built into them. This means that they will not accept a value that is not for example, a number, a URL, outside of a range, or an email address. You can also specify the required attribute on an input element to mark it as requiring a value before it can be submitted. The pattern attribute exists on text, search, url, tel, email, and password inputs. When present, the pattern attribute provides a regular expression that must match for the input to be considered as valid.
+
+You should also have validation built into your JavaScript that checks input data to ensure everything is valid before it is submitted. All of the input elements support functions for determining their validation state. Additionally, there are CSS style selectors for visualizing the validity of the input. In order to have a good user experience, it is critical that you provide sufficient user feedback early in the input process. A good design will give feedback as, or before, the user begins to input. A poor design will keep the user guessing as to why the data is not being accepted, or even if it was accepted.
+
+
+
+## HTML media elements ##
+The HTML elements that represent media include img, audio, video, svg, and canvas. The img, audio, and video elements are all simple references to an external file, but svg and canvas both contain the code to render a visual image that can even be animated.
+
+### External media ###
+The media tags that reference external media all take a URL as an attribute. The path represented by the URL can either be a relative path or full path. A full path includes the protocol, domain name, and path to the file.
+
+```
+https://images.pexels.com/photos/164170/pexels-photo-164170.jpeg
+```
+A relative path references a file that is served from the same location as the HTML page rendering the element. You want to make the path as relative as possible so that you can move your code around without having to actually adjust all of the external page references. For example, if your HTML page is located in a directory with a subdirectory named images that contains a file named photo.jpg you would use a relative path as follows.
+
+```
+images/photo.jpg
+```
+
+#### Image ####
+To include an image in your content you use the img element and specify the src attribute with the URL to the source image. In order to support accessibility, you should also include an alt attribute that describes the image. A full img element would look like the following.
+
+```
+<img alt="mountain landscape" src="https://images.pexels.com/photos/164170/pexels-photo-164170.jpeg" />
+```
+
+#### Audio ####
+To include an audio file in your content you use the audio element and specify the src attribute with the URL to the source audio file. You can include the controls attribute if you want the user to be able to control the audio playback. If you do not display the controls then there is no visual representation of the audio in the rendered page. The autoplay attribute starts the audio playing as soon as the audio file is loaded, and the loop attribute keeps it playing over and over.
+
+⚠ Note that automatically playing audio is strongly discouraged unless you provide a way for the user to opt-in to that behavior.
+
+```
+<audio controls src="testAudio.mp3"></audio>
+```
+
+#### Video ####
+To include a video in your content you use the video element and specify the src attribute with the URL to the source video. Like the audio element you can include the controls or autoplay attributes.
+
+⚠ Note that you may need to include the crossorigin="anonymous" attribute if you are requesting files from a different domain than the one serving your content.
+
+```
+<video controls width="300" crossorigin="anonymous">
+  <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" />
+</video>
+```
+
+### Internal media ###
+The internal media elements svg and canvas allow you to actually create images directly within your HTML.
+
+#### Scalable Vector Graphics (SVG) ####
+SVG is an extremely powerful and widely supported way to render graphics inline in your HTML. An example SVG graphic that draws a black border and a red circle looks like this:
+
+```
+<svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" stroke="red" fill="red" style="border: 1px solid #000000">
+  <circle cx="150" cy="100" r="50" />
+</svg>
+```
+
+When combined with JavaScript and CSS you can produce some amazing visualizations. Checkout this CodePen for an example.
+
+Consult the MDN documentation if you are interested in learning more about SVG.
+
+#### Canvas ####
+The canvas element was introduced to HTML in order to facilitate 2D drawing and animation. The HTML for the canvas element is fairly simple, but actually drawing on the canvas requires JavaScript support. Here again, is our simple red dot example.
+
+```
+<canvas id="canvasDemo" width="300" height="200" style="border: 1px solid #000000"></canvas>
+<script>
+  const ctx = document.getElementById('canvasDemo').getContext('2d');
+  ctx.beginPath();
+  ctx.arc(150, 100, 50, 0, 2 * Math.PI);
+  ctx.fillStyle = 'red';
+  ctx.strokeStyle = 'red';
+  ctx.fill();
+  ctx.stroke();
+</script>
+```
+
+
+
 ## JS Promises ##
 The rendering process of your HTML executes on a single thread. That means that you cannot take a long time processing JavaScript on the main rendering thread. Long running, or blocking tasks, should be executed with the use of a JavaScript Promise. The execution of a promise allows the main rendering thread to continue while some action is executed in the background. You create a promise by calling the Promise object constructor and passing it an executor function that runs the asynchronous operation. Executing asynchronously means that promise constructor may return before the promise executor function runs. The state of the promise execution is always in one of three possible states.
 
