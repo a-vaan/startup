@@ -45,6 +45,7 @@ We can demonstrate asynchronous execution by using the standard JavaScript setTi
 `//   After promise 1`
 `//   In promise 2`
 `//   After promise 2`
+
 #### Resolving and rejecting ####
 Now that we know how to use a promise to execute asynchronously, we need to be able to set the state to fulfilled when things complete correctly, or to rejected when an error happens. The promise executor function takes two functions as parameters, resolve and reject. Calling resolve sets the promise to the fulfilled state, and calling reject sets the promise to the rejected state.
 
@@ -68,3 +69,30 @@ If you wait ten seconds and then log the coinToss promise object again, the stat
 
 `console.log(coinToss);`
 `// OUTPUT: Promise {<fulfilled>}`
+
+#### Then, catch, finally ####
+With the ability to asynchronously execute and set the resulting state, we now need a way to generically do something with the result of a promise after it resolves. This is done with functionality similar to exception handling. The promise object has three functions: then, catch, and finally. The then function is called if the promise is fulfilled, catch is called if the promise is rejected, and finally is always called after all the processing is completed.
+
+We can rework our coinToss example and make it so 10 percent of the time the coin falls off the table and resolves to the rejected state. Otherwise the promise resolves to fulfilled with a result of either heads or tails.
+
+```
+const coinToss = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    if (Math.random() > 0.1) {
+      resolve(Math.random() > 0.5 ? 'heads' : 'tails');
+    } else {
+      reject('fell off table');
+    }
+  }, 10000);
+});
+```
+We then chain the then, catch and finally functions to the coinToss object in order to handle each of the possible results.
+
+coinToss
+  .then((result) => console.log(`Coin toss result: ${result}`))
+  .catch((err) => console.log(`Error: ${err}`))
+  .finally(() => console.log('Toss completed'));
+
+// OUTPUT:
+//    Coin toss result: tails
+//    Toss completed
