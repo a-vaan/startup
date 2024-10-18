@@ -4064,8 +4064,10 @@ y	Perform a "sticky" search that matches starting at the current position in the
 - This code adds a mouseover effect to **a** p element `document.querySelector('p').addEventListener('mouseover', console.log);`
 - The `chmod +x` command in Linux adds the execute (x) permission to a file
 - In CSS, the main difference between padding and margin is where they create space on a web page: 
+
 **Padding**
 Creates space inside an element, between its content and its border. Padding can be used to separate text and images, or to increase or decrease the size of an element. 
+
 **Margin**
 Creates space around an element, outside of its border. Margin can be used to separate elements from each other, or from the edge of the screen.
 - The CSS property `padding: 0 0.3em;` sets the padding (the space between the content of an element and its border) on the element as follows: Top and bottom padding: 0 (no space). Left and right padding: 0.3em. The unit em is relative to the font size of the element. For example, if the font size is 16px, 0.3em equals 0.3 times 16px, which is 4.8px. This CSS rule creates space only on the left and right sides of the content but no space above or below.
@@ -4160,3 +4162,50 @@ This approach works if the "animal" text is the first <span> element in the docu
 document.getElementById('animal').textContent = 'crow';
 ```
 Here, the id="animal" ensures that only the span with "animal" is modified.
+
+- The chmod (CHange MODe) command is used to change file and directory permissions on Unix and Unix-like systems. It allows users to control who can access files and directories, and what they can do with them.
+- Nano is a simple, terminal-based text editor that allows users to edit text files directly from the command line. It's commonly used in Unix-based operating systems and is ideal for making small changes to configuration files or writing short plain text files.
+- mv example: `mv [source_file_name(s)] [Destination_file_name]`
+- man example: `man [command_name]`
+
+- ssh example: `ssh [options] user@hostname`
+
+**Key Components**
+ssh: The command to start the SSH client.
+user: The username you want to log in as (on the remote system).
+hostname: The remote machine’s IP address or domain name (e.g., 192.168.1.10 or example.com).
+options: Optional flags that modify the SSH behavior (e.g., port, identity file, etc.).
+
+SSH with a custom port: If the SSH server is running on a different port (e.g., 2222 instead of the default 22), you can specify the port using the -p option: `ssh -p 2222 user@hostname`
+
+Using an identity (private key) file: If the remote server uses a specific private key for authentication, you can specify the private key file with the -i option: `ssh -i /path/to/private_key user@hostname`
+
+Running a command remotely: You can also execute a command on the remote server after logging in: `ssh user@hostname 'command'`
+
+SSH with agent forwarding: To forward your local SSH agent to the remote server, use the -A option: `ssh -A user@hostname`
+
+Enable verbose mode: For debugging purposes or to see detailed connection info, you can use the -v option: `ssh -v user@hostname`
+
+- The wget command in Linux is a powerful utility used to download files from the web directly via the command line. It supports downloading files over protocols such as HTTP, HTTPS, and FTP: `wget [options] [URL]`
+- The sudo (short for "superuser do") command in Linux allows a permitted user to execute a command as the superuser (root) or another user, as specified in the /etc/sudoers file. It is commonly used to run commands that require administrative or root-level privileges without logging in as the root user: `sudo [options] command`
+- When the -la parameter is specified for the ls command in Linux, the following is true:
+
+-l: This option stands for "long format." It displays detailed information about each file or directory, including:
+1. File type and permissions.
+2. Number of links to the file.
+3. Owner name.
+4. Owner group.
+5. File size.
+6. Last modified date and time.
+7. File or directory name.
+
+-a: This option stands for "all." It includes hidden files and directories in the output. In Unix-like systems, files and directories that begin with a dot (.) are considered hidden and are not shown by default.
+
+The . represents the current directory, the .. represents the parent directory, the -rw-r--r-- indicates file permissions, and user group shows the owner and group.
+
+- Top-Level Domain (TLD): `.com`; Root Domain: `example.com`; Subdomain: `blog.example.com`; `banana.fruit` (where banana is a subdomain of fruit, which is itself a subdomain of bozo.click)
+- A web certificate, also known as an SSL certificate, is required to use HTTPS
+- A DNS A record can point to an IP address or another A record
+- Each port number is assigned to a specific protocol or service. Port 80 is used for HTTP traffic, port 443 is used for HTTPS (HyperText Transfer Protocol Secure) traffic, and port 22 is used for Secure Shell (SSH) communication and allows remote administration access to the VM
+- `function (x) = {}` is not valid JavaScript function syntax
+- The textContent property in the DOM (Document Object Model) is used to get or set the text content of an element and its descendants. It represents the textual content of a node and its child nodes.
