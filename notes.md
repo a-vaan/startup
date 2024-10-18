@@ -4000,3 +4000,18 @@ Experiment with this simple file until you are comfortable running the debugger,
 ## Midterm Review ##
 
 - Padding puts space around the content of selected elements.
+- The CSS box model goes, from the outside in, margin, boarder, padding, content
+- In JavaScript regular expressions, the i flag stands for case-insensitive matching. This means that your regex will match both uppercase and lowercase characters, regardless of the case in your pattern. Additionally a forward slash (/) indicates the beginning and end of the expression.
+```
+Flag	Description	Corresponding property
+d	Generate indices for substring matches.	hasIndices
+g	Global search.	global
+i	Case-insensitive search.	ignoreCase
+m	Allows ^ and $ to match next to newline characters.	multiline
+s	Allows . to match newline characters.	dotAll
+u	"Unicode"; treat a pattern as a sequence of Unicode code points.	unicode
+v	An upgrade to the u mode with more Unicode features.	unicodeSets
+y	Perform a "sticky" search that matches starting at the current position in the target string.	sticky
+```
+<img alt="regex" src="images/regex.png">
+- <javascript></javascript> is not valid syntax for adding JavaScript to HTML
