@@ -4015,3 +4015,8 @@ y	Perform a "sticky" search that matches starting at the current position in the
 ```
 <img alt="regex" src="images/regex.png">
 - <\javascript></\javascript> is not valid syntax for adding JavaScript to HTML
+- The DOM textContent property sets the child text for the an element(?)
+This code adds a mouseover effect to **a** p element
+```
+document.querySelector('p').addEventListener('mouseover', console.log);
+```
