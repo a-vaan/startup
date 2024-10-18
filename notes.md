@@ -4065,9 +4065,9 @@ y	Perform a "sticky" search that matches starting at the current position in the
 - The `chmod +x` command in Linux adds the execute (x) permission to a file
 - In CSS, the main difference between padding and margin is where they create space on a web page: 
 **Padding**
-- Creates space inside an element, between its content and its border. Padding can be used to separate text and images, or to increase or decrease the size of an element. 
+Creates space inside an element, between its content and its border. Padding can be used to separate text and images, or to increase or decrease the size of an element. 
 **Margin**
-- Creates space around an element, outside of its border. Margin can be used to separate elements from each other, or from the edge of the screen.
+Creates space around an element, outside of its border. Margin can be used to separate elements from each other, or from the edge of the screen.
 - The CSS property `padding: 0 0.3em;` sets the padding (the space between the content of an element and its border) on the element as follows: Top and bottom padding: 0 (no space). Left and right padding: 0.3em. The unit em is relative to the font size of the element. For example, if the font size is 16px, 0.3em equals 0.3 times 16px, which is 4.8px. This CSS rule creates space only on the left and right sides of the content but no space above or below.
 - In JavaScript, map() is a method of the Array object. It creates a new array by calling a function on every element of the original array and storing the results in a new array.
 - The getElementById() method returns an element with a specified value. The getElementById() method returns null if the element does not exist. The getElementById() method is one of the most common methods in the HTML DOM. It is used almost every time you want to read or edit an HTML element.
