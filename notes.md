@@ -1415,6 +1415,8 @@ In this case, the rules cascade down from the highest nodes in the DOM tree to t
 ### The box model ###
 CSS defines everything as boxes. When you apply styles, you are applying them to a region of the display that is a rectangular box. Within an element's box there are several internal boxes. The innermost box holds the element's content. This is where things like the text or image of an element is displayed. Next comes the padding. The padding will inherit things like the background color. After padding is the border, which has properties like color, thickness and line style. The final box is the margin. The margin is considered external to the actual styling of the box and therefore only represents whitespace. It is important to understand each of these boxes so that you can achieve the desired visual result by applying the proper CSS declaration.
 
+<img alt="box model" src="images/cssBoxModel.jpg">
+
 By default, the width and height of an element is defined by the width and height of the content box. You can change the box-sizing CSS property from the default value of content-box to border-box in order to redefine the width and height to also include the padding and the border. This often makes it easier to style elements when their visual size matches their actual size.
 
 ### CSS Versions ###
@@ -3994,3 +3996,7 @@ Now start the debugger again by pressing F5. The code will start running, but pa
 You can continue execution of the code by pressing F10 to step to the next line, F11 to step into a function call, or F5 to continue running from the current line. When the last line of code executes the debugger will automatically exit and you will need to press F5 to start it running again. You can stop debugging at any time by pressing SHIFT-F5.
 
 Experiment with this simple file until you are comfortable running the debugger, setting breakpoints, and inspecting variables.
+
+## Midterm Review ##
+
+- Padding puts space around the content of selected elements.
