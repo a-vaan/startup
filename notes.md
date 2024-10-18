@@ -4013,10 +4013,9 @@ u	"Unicode"; treat a pattern as a sequence of Unicode code points.	unicode
 v	An upgrade to the u mode with more Unicode features.	unicodeSets
 y	Perform a "sticky" search that matches starting at the current position in the target string.	sticky
 ```
+
 <img alt="regex" src="images/regex.png">
-- <\javascript></\javascript> is not valid syntax for adding JavaScript to HTML
+
+- `<javascript></javascript>` is not valid syntax for adding JavaScript to HTML
 - The DOM textContent property sets the child text for the an element(?)
-This code adds a mouseover effect to **a** p element
-```
-document.querySelector('p').addEventListener('mouseover', console.log);
-```
+- This code adds a mouseover effect to **a** p element `document.querySelector('p').addEventListener('mouseover', console.log);`
