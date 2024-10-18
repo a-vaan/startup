@@ -4014,4 +4014,4 @@ v	An upgrade to the u mode with more Unicode features.	unicodeSets
 y	Perform a "sticky" search that matches starting at the current position in the target string.	sticky
 ```
 <img alt="regex" src="images/regex.png">
-- <javascript></javascript> is not valid syntax for adding JavaScript to HTML
+- <\javascript></\javascript> is not valid syntax for adding JavaScript to HTML
