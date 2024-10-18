@@ -2409,6 +2409,49 @@ for (const val of arr) {
 // OUTPUT: 'b'
 ```
 
+#### switch ####
+Use the switch statement to select one of many code blocks to be executed.
+```
+switch(expression) {
+  case x:
+    // code block
+    break;
+  case y:
+    // code block
+    break;
+  default:
+    // code block
+}
+```
+This is how it works:
+
+- The switch expression is evaluated once.
+- The value of the expression is compared with the values of each case.
+- If there is a match, the associated block of code is executed.
+- If there is no match, the default code block is executed.
+
+When JavaScript reaches a break keyword, it breaks out of the switch block. This will stop the execution inside the switch block. It is not necessary to break the last case in a switch block. The block breaks (ends) there anyway.
+
+The default keyword specifies the code to run if there is no case match.
+
+If multiple cases matches a case value, the first case is selected. If no matching cases are found, the program continues to the default label. If no default label is found, the program continues to the statement(s) after the switch.
+
+Sometimes you will want different switch cases to use the same code. In this example case 4 and 5 share the same code block, and 0 and 6 share another code block:
+```
+switch (new Date().getDay()) {
+  case 4:
+  case 5:
+    text = "Soon it is Weekend";
+    break;
+  case 0:
+  case 6:
+    text = "It is Weekend";
+    break;
+  default:
+    text = "Looking forward to the Weekend";
+}
+```
+
 #### Break and continue ####
 All of the looping constructs demonstrated above allow for either a break or continue statement to abort or advance the loop.
 
@@ -4019,3 +4062,101 @@ y	Perform a "sticky" search that matches starting at the current position in the
 - `<javascript></javascript>` is not valid syntax for adding JavaScript to HTML
 - The DOM textContent property sets the child text for the an element(?)
 - This code adds a mouseover effect to **a** p element `document.querySelector('p').addEventListener('mouseover', console.log);`
+- The `chmod +x` command in Linux adds the execute (x) permission to a file
+- In CSS, the main difference between padding and margin is where they create space on a web page: 
+**Padding**
+- Creates space inside an element, between its content and its border. Padding can be used to separate text and images, or to increase or decrease the size of an element. 
+**Margin**
+- Creates space around an element, outside of its border. Margin can be used to separate elements from each other, or from the edge of the screen.
+- The CSS property `padding: 0 0.3em;` sets the padding (the space between the content of an element and its border) on the element as follows: Top and bottom padding: 0 (no space). Left and right padding: 0.3em. The unit em is relative to the font size of the element. For example, if the font size is 16px, 0.3em equals 0.3 times 16px, which is 4.8px. This CSS rule creates space only on the left and right sides of the content but no space above or below.
+- In JavaScript, map() is a method of the Array object. It creates a new array by calling a function on every element of the original array and storing the results in a new array.
+- The getElementById() method returns an element with a specified value. The getElementById() method returns null if the element does not exist. The getElementById() method is one of the most common methods in the HTML DOM. It is used almost every time you want to read or edit an HTML element.
+- The addEventListener() method attaches an event handler to a document. Following is an addEventListener example that adds a click event to the document:
+
+```
+document.addEventListener("click", myFunction);
+
+function myFunction() {
+  document.getElementById("demo").innerHTML = "Hello World";
+}
+```
+
+- In JavaScript, the # symbol is not a selector by itself. Instead, it is used in conjunction with the querySelector and querySelectorAll methods to select elements based on their ID.
+
+**Example:**
+```
+// Select the element with the ID "myElement"
+const element = document.querySelector("#myElement"); 
+
+// Do something with the element
+element.style.backgroundColor = "red"; 
+```
+**Explanation:**
+1. querySelector("#myElement"): This method searches the entire document for the first element with the ID "myElement".
+2. querySelectorAll("#myElement"): This method searches the entire document for all elements with the ID "myElement".
+
+- By default, the HTML <span> element has a CSS display property value of inline. This means that:
+1. The element does not start on a new line.
+2. It only takes up as much width as necessary.
+3. It does not break the flow of surrounding text or content.
+The <span> element is typically used for styling or manipulating small portions of text or inline content.
+
+- How to turn only text blue with divs: `div.header { color: blue; }`
+- How to add an image with a hyperlink in HTML:
+
+```
+<html>
+  <head>
+  </head>
+  <body>
+    <a href="https://www.educative.io" target="_blank">
+      <img src="https://www.educative.io/static/imgs/logos/logoMarkv2.png">
+    </a>
+  </body>
+</html>
+```
+By adding the <img> tag inside an <a> tag the browser can see that the image should be clickable.
+
+- Potential way to use JavaScript to select an element and change the text color: `document.getElementById("myP2").style.color = "blue";`
+- The opening HTML tags for a second level heading is `<h2>`, a first level heading is `<h1>`, and a third level heading is `<h3>` respectively.
+- To declare the document type to be HTML, you can add the following line of code to the top of your HTML document: `<!DOCTYPE html>`
+
+- It is possible to add new properties to JavaScript objects. Here are two ways to do it:
+1. Dot notation:
+```
+const person = {
+  name: "John"
+};
+
+person.age = 30;
+
+console.log(person); // { name: "John", age: 30 }
+```
+2. Bracket notation:
+```
+const car = {};
+
+car["brand"] = "Toyota";
+
+console.log(car); // { brand: "Toyota" }
+```
+
+- To specifically target the text "animal" and change it to "crow" while leaving the "fish" text unaffected, you can use JavaScript as follows:
+```
+// Select the first <span> element (which contains "animal")
+document.querySelector('span').textContent = 'crow';
+```
+
+**Explanation:**
+- document.querySelector('span') selects the first <span> element in the document (which contains the text "animal").
+- .textContent = 'crow'; changes the text inside that <span> to "crow."
+
+This approach works if the "animal" text is the first <span> element in the document. If there are more <span> elements and you need to be more specific, you can add classes or IDs to the <span> tags to differentiate them.
+```
+<span id="animal">animal</span>
+<span>fish</span>
+```
+```
+document.getElementById('animal').textContent = 'crow';
+```
+Here, the id="animal" ensures that only the span with "animal" is modified.
