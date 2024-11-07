@@ -35,6 +35,7 @@ export default function App() {
                     <Route path='/' element={<Login />} exact />
                     <Route path='/login' element={<Login />} />
                     <Route path='/create' element={<Create />} />
+                    <Route path='/comment' element={<Comment />} />
                     <Route path='*' element={<NotFound />} />
                 </Routes>
 
