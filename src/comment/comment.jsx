@@ -1,5 +1,5 @@
 import React from 'react';
-import './comment.css'
+import './comment.css';
 import { useLocation } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
@@ -7,7 +7,7 @@ export function Comment() {
   const location = useLocation();
   const { mediaName = "No Media Selected" } = location.state || {};
 
-  const [description, setDescription] = React.useState("Add a description");
+  const [description, setDescription] = React.useState("");
   const [rating, setRating] = React.useState(0);
   const [comments, setComments] = React.useState([]);
 
@@ -34,7 +34,7 @@ export function Comment() {
       );
     }
 
-  function updateMediaLocal() {
+  function updateMediaLocal(description, rating, comments) {
     let prevMedia;
     const newMedia = {
       description: description,
@@ -46,7 +46,8 @@ export function Comment() {
       prevMedia = JSON.parse(mediaText);
     }
 
-    if (newMedia !== newMedia) {
+    if (newMedia !== prevMedia) {
+      console.log(newMedia);
       localStorage.setItem(`${mediaName}`, JSON.stringify(newMedia));
     }
   }
@@ -54,10 +55,20 @@ export function Comment() {
   const [descVal, setDescVal] = React.useState("");
   const updateDescription = () => {
     setDescription(descVal);
-    updateMediaLocal();
+    updateMediaLocal(descVal, rating, comments);
   }
   const logDescription = event => {
       setDescVal(event.target.value);
+  }
+
+  const [comVal, setComVal] = React.useState("");
+  const updateComments = () => {
+    const newComments = [...comments, comVal];
+    setComments(newComments);
+    updateMediaLocal(description, rating, newComments);
+  }
+  const logComments = event => {
+      setComVal(event.target.value);
   }
 
   return (
@@ -80,16 +91,12 @@ export function Comment() {
         <div className="comments">
           <h4 className="cd-header">Comments:</h4>
           <ul className="list-group">{commentRows}</ul>
-          <form action="comment.html" method="get">
-            <input className="form-control" type="text" placeholder="Comment Here"></input>
-            <button type="submit" className="btn btn-primary">Submit New Comment</button>
-          </form>
+          <input className="form-control" type="text" placeholder="Comment Here" onChange={logComments} value={comVal}></input>
+          <Button type="submit" className="btn btn-primary" onClick={updateComments}>Submit New Comment</Button>
           <div className="submit-comment">
-            <form action="comment.html" method="get">
-              <label htmlFor="rating">Rating (between 0 and 5):</label>
-              <input type="range" id="rating" name="rating" min="0" max="5"></input>
-              <button type="submit" className="btn btn-primary">Submit Rating</button>
-            </form>
+            <label htmlFor="rating">Rating (between 0 and 5):</label>
+            <input type="range" id="rating" name="rating" min="0" max="5"></input>
+            <button type="submit" className="btn btn-primary">Submit Rating</button>
           </div>
         </div>
       </div>
