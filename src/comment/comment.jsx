@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
 export function Comment() {
+  // setting up variables
   const location = useLocation();
   const { mediaName = "No Media Selected" } = location.state || {};
 
@@ -21,6 +22,7 @@ export function Comment() {
     }
   }, []);
 
+  // putting comment rows into the correct format to be listed
   let commentRows = [];
     if (comments.length) {
       for (const [i, comment] of comments.entries()) {
@@ -34,6 +36,7 @@ export function Comment() {
       );
     }
 
+  // function to save media locally
   function updateMediaLocal(description, rating, comments) {
     let prevMedia;
     const newMedia = {
@@ -51,6 +54,7 @@ export function Comment() {
     }
   }
 
+  // code used to process values being passed into the description box
   const [descVal, setDescVal] = React.useState("");
   const updateDescription = () => {
     setDescription(descVal);
@@ -60,6 +64,7 @@ export function Comment() {
       setDescVal(event.target.value);
   }
 
+  // code used to process values being passed into the comments box
   const [comVal, setComVal] = React.useState("");
   const updateComments = () => {
     const newComments = [...comments, comVal];
@@ -70,6 +75,7 @@ export function Comment() {
       setComVal(event.target.value);
   }
 
+  // code used to process values being passed into ratings
   const [rateVal, setRateVal] = React.useState("");
   const updateRating = () => {
     let newRating = rateVal;
