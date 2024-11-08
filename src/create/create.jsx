@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './create.css'
 
 export function Create({ userName }) {
@@ -14,12 +14,12 @@ export function Create({ userName }) {
     }, []);
   
     // Demonstrates rendering an array with React
-    const mediaRows = [];
+    let mediaRows = [];
     if (media.length) {
       for (const [i, med] of media.entries()) {
         mediaRows.push(
           <tr key={i}>
-            <td>{score.name}</td>
+            <td>{med}</td>
           </tr>
         );
       }
@@ -30,6 +30,36 @@ export function Create({ userName }) {
         </tr>
       );
     }
+
+    const [val, setVal] = useState("")
+    const clickAdd = () => {
+        updateMediaLocal(val)
+    }
+    const change = event => {
+        setVal(event.target.value)
+    }
+
+    function updateMediaLocal(newMedia) {
+        let media = [];
+        const mediaText = localStorage.getItem('media');
+        if (mediaText) {
+          media = JSON.parse(mediaText);
+        }
+    
+        let found = false;
+        for (const prevMedia of media.entries()) {
+          if (prevMedia === newMedia) {
+            found = true;
+            break;
+          }
+        }
+    
+        if (!found) {
+          media.push(newMedia);
+        }
+    
+        localStorage.setItem('media', JSON.stringify(media));
+      }
 
     return (
         <main className="container-fluid bg-secondary text-center">
@@ -49,9 +79,9 @@ export function Create({ userName }) {
                 </table>
 
                 <div className="form-group row">
-                <form action="comment.html" method="get">
-                    <input className="form-control" type="text" placeholder="TV Show/Movie" />
-                    <button type="submit" className="btn btn-primary">Add New TV Show/Movie</button>
+                <form>
+                    <input className="form-control" type="text" placeholder="TV Show/Movie" onChange={change} value={val} />
+                    <button type="submit" className="btn btn-primary" onClick={clickAdd}>Add New TV Show/Movie</button>
                 </form>
                 </div>
             </div>
