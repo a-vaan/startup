@@ -8,7 +8,7 @@ export function Comment() {
   const { mediaName = "No Media Selected" } = location.state || {};
 
   const [description, setDescription] = React.useState("");
-  const [rating, setRating] = React.useState(0);
+  const [rating, setRating] = React.useState("");
   const [comments, setComments] = React.useState([]);
 
   React.useEffect(() => {
@@ -47,7 +47,6 @@ export function Comment() {
     }
 
     if (newMedia !== prevMedia) {
-      console.log(newMedia);
       localStorage.setItem(`${mediaName}`, JSON.stringify(newMedia));
     }
   }
@@ -71,6 +70,19 @@ export function Comment() {
       setComVal(event.target.value);
   }
 
+  const [rateVal, setRateVal] = React.useState("");
+  const updateRating = () => {
+    let newRating = rateVal;
+    if (rating) {
+      newRating = (Number(rateVal) + Number(rating))/2;
+    }
+    setRating(newRating);
+    updateMediaLocal(description, newRating, comments);
+  }
+  const logRating = event => {
+      setRateVal(event.target.value);
+  }
+
   return (
     <main className="container-fluid bg-secondary text-center">
       <div className="title">
@@ -82,7 +94,7 @@ export function Comment() {
         <div className="description">
           <h4 className="cd-header">Description:</h4>
           <p>{description}</p>
-          <textarea id="description" name="description" rows="5" cols="25" placeholder="Write New Description" onChange={logDescription} value={descVal}></textarea>
+          <textarea id="description" name="description" rows="5" cols="25" placeholder="Write a new description" onChange={logDescription} value={descVal}></textarea>
           <div className="description-submit">
             <Button type="submit" className="btn btn-primary" onClick={updateDescription}>Submit New Description</Button>
           </div>
@@ -91,12 +103,12 @@ export function Comment() {
         <div className="comments">
           <h4 className="cd-header">Comments:</h4>
           <ul className="list-group">{commentRows}</ul>
-          <input className="form-control" type="text" placeholder="Comment Here" onChange={logComments} value={comVal}></input>
+          <input className="form-control" type="text" placeholder="Comment here" onChange={logComments} value={comVal}></input>
           <Button type="submit" className="btn btn-primary" onClick={updateComments}>Submit New Comment</Button>
           <div className="submit-comment">
             <label htmlFor="rating">Rating (between 0 and 5):</label>
-            <input type="range" id="rating" name="rating" min="0" max="5"></input>
-            <button type="submit" className="btn btn-primary">Submit Rating</button>
+            <input type="range" id="rating" name="rating" min="0" max="5" onChange={logRating} value={rateVal}></input>
+            <Button type="submit" className="btn btn-primary" onClick={updateRating}>Submit Rating</Button>
           </div>
         </div>
       </div>
