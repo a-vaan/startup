@@ -47,7 +47,7 @@ export default function App() {
                           setUserName(userName);
                         }}
                     />} exact />
-                    <Route path='/create' element={<Create />} />
+                    <Route path='/create' element={<Create userName={userName}/>} />
                     <Route path='/comment' element={<Comment />} />
                     <Route path='*' element={<NotFound />} />
                 </Routes>

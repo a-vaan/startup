@@ -18,7 +18,7 @@ export function Login({ userName, authState, onAuthChange}) {
         <main className="container-fluid bg-secondary text-center">
             <div className="top-banner">
                 <h1>Welcome to Simply Cinema!</h1>
-                <h3 className='quote'>{quote}</h3>
+                <h3 className='quote'>"{quote}"</h3>
                 <h4 className='quoteAuthor'>{quoteAuthor}</h4>
             </div>
 

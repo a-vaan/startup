@@ -1,12 +1,44 @@
 import React from 'react';
 import './create.css'
 
-export function Create() {
+export function Create({ userName }) {
+    const [scores, setScores] = React.useState([]);
+
+    // Demonstrates calling a service asynchronously so that
+    // React can properly update state objects with the results.
+    React.useEffect(() => {
+      const scoresText = localStorage.getItem('scores');
+      if (scoresText) {
+        setScores(JSON.parse(scoresText));
+      }
+    }, []);
+  
+    // Demonstrates rendering an array with React
+    const scoreRows = [];
+    if (scores.length) {
+      for (const [i, score] of scores.entries()) {
+        scoreRows.push(
+          <tr key={i}>
+            <td>{i}</td>
+            <td>{score.name.split('@')[0]}</td>
+            <td>{score.score}</td>
+            <td>{score.date}</td>
+          </tr>
+        );
+      }
+    } else {
+      scoreRows.push(
+        <tr key='0'>
+          <td colSpan='4'>Be the first to score</td>
+        </tr>
+      );
+    }
+
     return (
         <main className="container-fluid bg-secondary text-center">
             <div className="user">
                 User:
-                <span className="user-name">User's Name</span>
+                <span className="user-name"> {userName}</span>
             </div>
 
             <div>
@@ -16,40 +48,7 @@ export function Create() {
                             <th>Show/Movie List</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                        <td>
-                            <a className="nav-link" href="comment.html">Star Wars</a></td>
-                        </tr>
-                        <tr>
-                        <td>
-                            <a className="nav-link" href="comment.html">Breaking Bad</a></td>
-                        </tr>
-                        <tr>
-                        <td>
-                            <a className="nav-link" href="comment.html">Lord of the Rings</a></td>
-                        </tr>
-                        <tr>
-                        <td>
-                            <a className="nav-link" href="comment.html">The Fast and the Furious</a></td>
-                        </tr>
-                        <tr>
-                        <td>
-                            <a className="nav-link" href="comment.html">Arcane</a></td>
-                        </tr>
-                        <tr>
-                        <td>
-                            <a className="nav-link" href="comment.html">The Joy of Painting</a></td>
-                        </tr>
-                        <tr>
-                        <td>
-                            <a className="nav-link" href="comment.html">The Conjuring</a></td>
-                        </tr>
-                        <tr>
-                        <td>
-                            <a className="nav-link" href="comment.html">Arrested Development</a></td>
-                        </tr>
-                    </tbody>
+                    <tbody id='media-list'>{mediaRows}</tbody>
                 </table>
 
                 <div className="form-group row">
