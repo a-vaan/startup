@@ -2,34 +2,31 @@ import React from 'react';
 import './create.css'
 
 export function Create({ userName }) {
-    const [scores, setScores] = React.useState([]);
+    const [media, setMedia] = React.useState([]);
 
     // Demonstrates calling a service asynchronously so that
     // React can properly update state objects with the results.
     React.useEffect(() => {
-      const scoresText = localStorage.getItem('scores');
-      if (scoresText) {
-        setScores(JSON.parse(scoresText));
+      const mediaText = localStorage.getItem('media');
+      if (mediaText) {
+        setMedia(JSON.parse(mediaText));
       }
     }, []);
   
     // Demonstrates rendering an array with React
-    const scoreRows = [];
-    if (scores.length) {
-      for (const [i, score] of scores.entries()) {
-        scoreRows.push(
+    const mediaRows = [];
+    if (media.length) {
+      for (const [i, med] of media.entries()) {
+        mediaRows.push(
           <tr key={i}>
-            <td>{i}</td>
-            <td>{score.name.split('@')[0]}</td>
-            <td>{score.score}</td>
-            <td>{score.date}</td>
+            <td>{score.name}</td>
           </tr>
         );
       }
     } else {
-      scoreRows.push(
+      mediaRows.push(
         <tr key='0'>
-          <td colSpan='4'>Be the first to score</td>
+          <td>Start adding media below</td>
         </tr>
       );
     }
