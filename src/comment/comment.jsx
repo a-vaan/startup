@@ -1,7 +1,11 @@
 import React from 'react';
 import './comment.css'
+import { useLocation } from 'react-router-dom';
 
-export function Comment({ mediaName }) {
+export function Comment() {
+  const location = useLocation();
+  const { mediaName = "No Media Selected" } = location.state || {};
+
   return (
     <main className="container-fluid bg-secondary text-center">
       <div className="title">

@@ -17,8 +17,8 @@ export function Create({ userName }) {
     }, []);
 
     const navigate = useNavigate();
-    const clickMedia = (media) => {
-        navigate('/comment', {state:{ mediaName: media }})
+    const clickMedia = (med) => {
+        navigate('/comment', {state:{ mediaName: med }})
     }
   
     // Demonstrates rendering an array with React
