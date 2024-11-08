@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { Button } from 'react-bootstrap';
 import './create.css'
+import { useNavigate } from 'react-router-dom';
 
 export function Create({ userName }) {
+    // portion of code used to generate new rows and populate them with data from local storage
     const [media, setMedia] = React.useState([]);
 
     // Demonstrates calling a service asynchronously so that
@@ -12,6 +15,11 @@ export function Create({ userName }) {
         setMedia(JSON.parse(mediaText));
       }
     }, []);
+
+    const navigate = useNavigate();
+    const clickMedia = (media) => {
+        navigate('/comment', {state:{ mediaName: media }})
+    }
   
     // Demonstrates rendering an array with React
     let mediaRows = [];
@@ -19,7 +27,7 @@ export function Create({ userName }) {
       for (const [i, med] of media.entries()) {
         mediaRows.push(
           <tr key={i}>
-            <td>{med}</td>
+            <td onClick={() => clickMedia(med)}>{med}</td>
           </tr>
         );
       }
@@ -31,12 +39,13 @@ export function Create({ userName }) {
       );
     }
 
+    // portion of code used to save new media entries to local storage
     const [val, setVal] = useState("")
     const clickAdd = () => {
-        updateMediaLocal(val)
+        updateMediaLocal(val);
     }
     const change = event => {
-        setVal(event.target.value)
+        setVal(event.target.value);
     }
 
     function updateMediaLocal(newMedia) {
@@ -79,9 +88,9 @@ export function Create({ userName }) {
                 </table>
 
                 <div className="form-group row">
-                <form>
+                <form  className = "form">
                     <input className="form-control" type="text" placeholder="TV Show/Movie" onChange={change} value={val} />
-                    <button type="submit" className="btn btn-primary" onClick={clickAdd}>Add New TV Show/Movie</button>
+                    <Button type="submit" className="btn btn-primary" onClick={clickAdd}>Add New TV Show/Movie</Button>
                 </form>
                 </div>
             </div>

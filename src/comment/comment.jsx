@@ -1,11 +1,11 @@
 import React from 'react';
 import './comment.css'
 
-export function Comment() {
+export function Comment({ mediaName }) {
   return (
     <main className="container-fluid bg-secondary text-center">
       <div className="title">
-        <h2>Star Wars</h2>
+        <h2>{mediaName}</h2>
         <h4>Rating: 4.5/5</h4>
       </div>
 
@@ -34,7 +34,7 @@ export function Comment() {
           </form>
           <div className="submit-comment">
             <form action="comment.html" method="get">
-              <label for="rating">Rating (between 0 and 5):</label>
+              <label htmlFor="rating">Rating (between 0 and 5):</label>
               <input type="range" id="rating" name="rating" min="0" max="5"></input>
               <button type="submit" className="btn btn-primary">Submit Rating</button>
             </form>
