@@ -1,7 +1,11 @@
 import React from 'react';
 import './login.css';
 
-export function Login() {
+import { Unauthenticated } from './unauthenticated';
+import { Authenticated } from './authenticated';
+import { AuthState } from './authState';
+
+export function Login({ userName, authState, onAuthChange}) {
     const [quote, setQuote] = React.useState('Loading...');
     const [quoteAuthor, setQuoteAuthor] = React.useState('unknown');
 
@@ -21,18 +25,20 @@ export function Login() {
             <div className="picture-form">
                 <img src="../../film_pic_1.jpg" alt="Film Pic 1" className="picture"></img>
 
-                <form method="get" action="create.html">
-                <div className="input-group mb-3">
-                    <input className="form-control" type="text" placeholder="Username" />
-                </div>
-                <div className="input-group mb-3">
-                    <input className="form-control" type="password" placeholder="Password" />
-                </div>
                 <div>
-                    <button type="submit" className="btn btn-primary">Login</button>
-                    <button type="submit" className="btn btn-secondary">Register</button>
+                    {authState !== AuthState.Unknown}
+                    {authState === AuthState.Authenticated && (
+                        <Authenticated userName={userName} onLogout={() => onAuthChange(userName, AuthState.Unauthenticated)} />
+                    )}
+                    {authState === AuthState.Unauthenticated && (
+                        <Unauthenticated
+                            userName={userName}
+                            onLogin={(loginUserName) => {
+                                onAuthChange(loginUserName, AuthState.Authenticated);
+                            }}
+                        />
+                    )}
                 </div>
-                </form>
 
                 <img src="../../film_pic_2.jpg" alt="Film Pic 2" className="picture"></img>
             </div>
