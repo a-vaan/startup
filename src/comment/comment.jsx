@@ -11,6 +11,17 @@ export function Comment() {
   const [description, setDescription] = React.useState("");
   const [rating, setRating] = React.useState("");
   const [comments, setComments] = React.useState([]);
+  
+  // code simulating WebSocket input
+  React.useEffect(() => {
+    let intervalId;
+  
+    intervalId = setInterval(() => {
+      setComments(prevComments => [...prevComments, "WebSocket Comment"]);
+    }, 10000);
+  
+    return () => clearInterval(intervalId);
+  }, [comments]);
 
   React.useEffect(() => {
     const mediaText = localStorage.getItem(`${mediaName}`);
@@ -108,7 +119,7 @@ export function Comment() {
 
         <div className="comments">
           <h4 className="cd-header">Comments:</h4>
-          <ul className="list-group">{commentRows}</ul>
+          <ul className="list-group comment-list">{commentRows}</ul>
           <input className="form-control" type="text" placeholder="Comment here" onChange={logComments} value={comVal}></input>
           <Button type="submit" className="btn btn-primary" onClick={updateComments}>Submit New Comment</Button>
           <div className="submit-comment">
