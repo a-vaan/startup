@@ -68,8 +68,8 @@ For this deliverable I used JavaScript and React so that the application complet
 
 - **Bundled and transpiled** - done!
 - **Components** - Login, creating new media, and descriptions, comments, and rating are all components with mocks for each, including the WebSocket functionality that will later be applied to the comments section.
-- **login** - When you press enter or the login button it "signs you in" and allows you to access the list of media and interact with it.
-- **database** - Added fuctionality to display the list of media as well as the description, comments, and ratings. Currently this is stored and retrieved from local storage, but it will be replaced with the database data later.
-- **WebSocket** - I used the setInterval function to periodically increase a random vote count. This will be replaced with WebSocket messages later.
-- **Router** - Routing between login and voting components.
-- **Hooks** - Vue uses class properties instead of UseState to track changes in vote state.
+  - **login** - When you press enter or the login button it "signs you in" and allows you to access the list of media and interact with it.
+  - **database** - Added fuctionality to display the list of media as well as the description, comments, and ratings. Currently this is stored and retrieved from local storage, but it will be replaced with the database data later.
+  - **WebSocket** - I used the setInterval function to periodically add a comment to the commments tab. This will be replaced with WebSocket messages later.
+- **Router** - Routing between login, create, and comment components.
+- **Hooks** - Added many hooks throughout the program, with multiple being used in app.jsx, login.jsx, create.jsx, and comment.jsx.
