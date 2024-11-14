@@ -4,7 +4,7 @@ const app = express();
 
 // The scores and users are saved in memory and disappear whenever the service is restarted.
 let users = {};
-let mediaList = [];
+let mediaList = {};
 let descriptions = {};
 let comments = {};
 let ratings = {};
@@ -63,9 +63,25 @@ apiRouter.get('/media', (_req, res) => {
 });
 
 // AddMedia
-apiRouter.post('/add-media', (req, res) => {
-  mediaList.push(req.body);
+apiRouter.post('/addmedia', (req, res) => {
+  mediaList[req.body.name] = uuid.v4();
   res.send(mediaList);
+});
+
+// GetDescription
+apiRouter.get('/description/:id', (req, res) => {
+  const description = descriptions[req.params.id];
+  if (description) {
+    res.send({ description });
+  } else {
+    res.status(404).send({ msg: 'Description not found' });
+  }
+});
+
+// AddDescription
+apiRouter.post('/add-description', (req, res) => {
+  descriptions[req.body.id] = req.body.description;
+  res.send(descriptions);
 });
 
 // Return the application's default page if the path is unknown
