@@ -10,7 +10,7 @@ let comments = {};
 let ratings = {};
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
-const port = process.argv.length > 2 ? process.argv[2] : 3000;
+const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 // JSON body parsing using built-in middleware
 app.use(express.json());
@@ -86,7 +86,6 @@ apiRouter.post('/add-description', (req, res) => {
 
 // GetComments
 apiRouter.get('/comments/:id', (req, res) => {
-  const showComments = comments[req.params.id];
   if (comments[req.params.id]) {
     res.send(comments[req.params.id]);
   } else {

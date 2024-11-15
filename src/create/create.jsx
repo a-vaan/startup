@@ -5,15 +5,17 @@ import { useNavigate } from 'react-router-dom';
 
 export function Create({ userName }) {
     // portion of code used to generate new rows and populate them with data from local storage
-    const [media, setMedia] = React.useState([]);
+    const [media, setMedia] = React.useState({});
 
     // Demonstrates calling a service asynchronously so that
     // React can properly update state objects with the results.
     React.useEffect(() => {
-      const mediaText = localStorage.getItem('media');
-      if (mediaText) {
-        setMedia(JSON.parse(mediaText));
-      }
+      fetch('/api/media')
+        .then((response) => response.json())
+        .then((media) => {
+          setMedia(media);
+        })
+        .catch((error) => console.error(error));
     }, []);
 
     const navigate = useNavigate();
@@ -23,10 +25,11 @@ export function Create({ userName }) {
   
     // Demonstrates rendering an array with React
     let mediaRows = [];
-    if (media.length) {
-      for (const [i, med] of media.entries()) {
+    let i = 0;
+    if (Object.values(media).length) {
+      for (const med in media) {
         mediaRows.push(
-          <tr key={i}>
+          <tr key={i++}>
             <td onClick={() => clickMedia(med)}>{med}</td>
           </tr>
         );
@@ -41,33 +44,26 @@ export function Create({ userName }) {
 
     // portion of code used to save new media entries to local storage
     const [val, setVal] = useState("")
-    const clickAdd = () => {
-        updateMediaLocal(val);
+    const clickAdd = async () => {
+        await updateMedia(val);
     }
     const change = event => {
         setVal(event.target.value);
     }
 
-    function updateMediaLocal(newMedia) {
-        let media = [];
-        const mediaText = localStorage.getItem('media');
-        if (mediaText) {
-          media = JSON.parse(mediaText);
+    async function updateMedia(newMedia) {
+        let media = {name: newMedia};
+
+        await fetch('/api/add-media', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify(media),
+        });
+
+        if (!response.ok) {
+          console.error('Failed to add media');
+          return
         }
-    
-        let found = false;
-        for (const prevMedia of media.entries()) {
-          if (prevMedia === newMedia) {
-            found = true;
-            break;
-          }
-        }
-    
-        if (!found) {
-          media.push(newMedia);
-        }
-    
-        localStorage.setItem('media', JSON.stringify(media));
       }
 
     return (
