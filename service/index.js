@@ -107,7 +107,8 @@ apiRouter.post('/add-comment', (req, res) => {
 // GetRating
 apiRouter.get('/rating/:id', (req, res) => {
   if (ratings[req.params.id]) {
-    res.send(ratings[req.params.id]);
+    const averageRating = calculateRatings(ratings[req.params.id]);
+    res.send({ averageRating });
   } else {
     res.status(404).send({ msg: 'Ratings not found' });
   }
