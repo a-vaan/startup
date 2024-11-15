@@ -87,8 +87,8 @@ apiRouter.post('/add-description', (req, res) => {
 // GetComments
 apiRouter.get('/comments/:id', (req, res) => {
   const showComments = comments[req.params.id];
-  if (showComments) {
-    res.send({ showComments });
+  if (comments[req.params.id]) {
+    res.send(comments[req.params.id]);
   } else {
     res.status(404).send({ msg: 'Comments not found' });
   }
@@ -103,6 +103,26 @@ apiRouter.post('/add-comment', (req, res) => {
   }
   res.send(comments[req.body.id]);
 });
+
+// // GetRating
+// apiRouter.get('/rating/:id', (req, res) => {
+//   const showComments = comments[req.params.id];
+//   if (showComments) {
+//     res.send({ showComments });
+//   } else {
+//     res.status(404).send({ msg: 'Comments not found' });
+//   }
+// });
+
+// // AddRating
+// apiRouter.post('/add-rating', (req, res) => {
+//   if (comments[req.body.id]) {
+//     comments[req.body.id].push(req.body.comment);
+//   } else {
+//     comments[req.body.id] = [req.body.comment];
+//   }
+//   res.send(comments[req.body.id]);
+// });
 
 // Return the application's default page if the path is unknown
 app.use((_req, res) => {
