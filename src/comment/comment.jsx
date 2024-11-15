@@ -16,8 +16,20 @@ export function Comment() {
   React.useEffect(() => {
     let intervalId;
   
-    intervalId = setInterval(() => {
-      setComments(prevComments => [...prevComments, "WebSocket Comment"]);
+    intervalId = setInterval(async () => {
+      const commentBody = { id: mediaId, comment: "WebSocket Comment" }
+
+      await fetch('/api/add-comment', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(commentBody),
+      });
+
+      await fetch(`/api/comments/${mediaId}`)
+        .then((response) => response.json())
+        .then((comments) => {
+          setComments(comments);
+        })
     }, 10000);
   
     return () => clearInterval(intervalId);
@@ -30,12 +42,12 @@ export function Comment() {
         setDescription(description.description);
       })
       .catch((error) => console.error(error));
-    // fetch(`/api/comments/${mediaId}`)
-    //   .then((response) => response.json())
-    //   .then((comments) => {
-    //     setComments(comments.mediaId);
-    //   })
-    //   .catch((error) => console.error(error));
+    fetch(`/api/comments/${mediaId}`)
+      .then((response) => response.json())
+      .then((comments) => {
+        setComments(comments);
+      })
+      .catch((error) => console.error(error));
     // fetch(`/api/rating/${mediaId}`)
     //   .then((response) => response.json())
     //   .then((rating) => {
@@ -79,7 +91,6 @@ export function Comment() {
   // code used to process values being passed into the description box
   const [descVal, setDescVal] = React.useState("");
   const updateDescription = async () => {
-    setDescription(descVal);
     const description = { id: mediaId, description: descVal };
 
     await fetch('/api/add-description', {
@@ -87,6 +98,12 @@ export function Comment() {
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(description),
     });
+
+    fetch(`/api/description/${mediaId}`)
+      .then((response) => response.json())
+      .then((description) => {
+        setDescription(description.description);
+      })
   }
   const logDescription = event => {
       setDescVal(event.target.value);
@@ -94,10 +111,20 @@ export function Comment() {
 
   // code used to process values being passed into the comments box
   const [comVal, setComVal] = React.useState("");
-  const updateComments = () => {
-    const newComments = [...comments, comVal];
-    setComments(newComments);
-    updateMediaLocal(description, rating, newComments);
+  const updateComments = async () => {
+    const commentBody = { id: mediaId, comment: comVal }
+
+    await fetch('/api/add-comment', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(commentBody),
+    });
+
+    await fetch(`/api/comments/${mediaId}`)
+      .then((response) => response.json())
+      .then((comments) => {
+        setComments(comments);
+      })
   }
   const logComments = event => {
       setComVal(event.target.value);
