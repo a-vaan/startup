@@ -128,7 +128,7 @@ apiRouter.post('/add-rating', (req, res) => {
   }
 
   const averageRating = calculateRatings(ratings[req.body.id]);
-  res.send(averageRating);
+  res.send({ averageRating });
 });
 
 // Function to calculate the new rating as an average of all ratings
@@ -137,7 +137,7 @@ function calculateRatings(ratingsList) {
   for (let rating of ratingsList) {
     total += Number(rating);
   }
-  return total/(ratingsList.length)
+  return (total/(ratingsList.length)).toFixed(1);
 }
 
 // Return the application's default page if the path is unknown
