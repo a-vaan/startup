@@ -104,25 +104,41 @@ apiRouter.post('/add-comment', (req, res) => {
   res.send(comments[req.body.id]);
 });
 
-// // GetRating
-// apiRouter.get('/rating/:id', (req, res) => {
-//   const showComments = comments[req.params.id];
-//   if (showComments) {
-//     res.send({ showComments });
-//   } else {
-//     res.status(404).send({ msg: 'Comments not found' });
-//   }
-// });
+// GetRating
+apiRouter.get('/rating/:id', (req, res) => {
+  if (ratings[req.params.id]) {
+    res.send(ratings[req.params.id]);
+  } else {
+    res.status(404).send({ msg: 'Ratings not found' });
+  }
+});
 
-// // AddRating
-// apiRouter.post('/add-rating', (req, res) => {
-//   if (comments[req.body.id]) {
-//     comments[req.body.id].push(req.body.comment);
-//   } else {
-//     comments[req.body.id] = [req.body.comment];
-//   }
-//   res.send(comments[req.body.id]);
-// });
+// AddRating
+apiRouter.post('/add-rating', (req, res) => {
+  const rating = Number(req.body.rating); // Convert rating to a number
+
+  if (isNaN(rating)) {
+    return res.status(400).send({ msg: 'Invalid rating value' });
+  }
+
+  if (ratings[req.body.id]) {
+    ratings[req.body.id].push(req.body.rating);
+  } else {
+    ratings[req.body.id] = [req.body.rating];
+  }
+
+  const averageRating = calculateRatings(ratings[req.body.id]);
+  res.send(averageRating);
+});
+
+// Function to calculate the new rating as an average of all ratings
+function calculateRatings(ratingsList) {
+  let total = 0;
+  for (let rating of ratingsList) {
+    total += Number(rating);
+  }
+  return total/(ratingsList.length)
+}
 
 // Return the application's default page if the path is unknown
 app.use((_req, res) => {
