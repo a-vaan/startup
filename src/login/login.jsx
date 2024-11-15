@@ -10,8 +10,13 @@ export function Login({ userName, authState, onAuthChange}) {
     const [quoteAuthor, setQuoteAuthor] = React.useState('unknown');
 
     React.useEffect(() => {
-        setQuote('If you forced someone to do something they didn’t want to do, they’d just end up hating life.');
-        setQuoteAuthor('Chihiro Sengoku, Sakurasou no Pet na Kanojo');
+        fetch('https://api.kanye.rest/')
+            .then((response) => response.json())
+            .then((data) => {
+                setQuote(data.quote);
+                setQuoteAuthor("~ Kanye West ~");
+            })
+            .catch();
       }, []);
 
     return (
