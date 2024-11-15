@@ -7,11 +7,11 @@
 
 .main-body {
     display: flex;
+    overflow-y: auto;
 }
 
 .description {
     display: flex;
-    width: 15em;
     flex: 1;
     flex-direction: column;
     background-color: rgb(68, 68, 68);

@@ -24,13 +24,24 @@ export function Comment() {
   }, [comments]);
 
   React.useEffect(() => {
-    const mediaText = localStorage.getItem(`${mediaName}`);
-    if (mediaText) {
-      const parsedMedia = JSON.parse(mediaText);
-      setComments(parsedMedia.comments);
-      setDescription(parsedMedia.description);
-      setRating(parsedMedia.rating);
-    }
+    fetch(`/api/description/${mediaId}`)
+      .then((response) => response.json())
+      .then((description) => {
+        setDescription(description.description);
+      })
+      .catch((error) => console.error(error));
+    // fetch(`/api/comments/${mediaId}`)
+    //   .then((response) => response.json())
+    //   .then((comments) => {
+    //     setComments(comments.mediaId);
+    //   })
+    //   .catch((error) => console.error(error));
+    // fetch(`/api/rating/${mediaId}`)
+    //   .then((response) => response.json())
+    //   .then((rating) => {
+    //     setRating(rating.mediaId);
+    //   })
+    //   .catch((error) => console.error(error));
   }, []);
 
   // putting comment rows into the correct format to be listed
@@ -67,9 +78,15 @@ export function Comment() {
 
   // code used to process values being passed into the description box
   const [descVal, setDescVal] = React.useState("");
-  const updateDescription = () => {
+  const updateDescription = async () => {
     setDescription(descVal);
-    updateMediaLocal(descVal, rating, comments);
+    const description = { id: mediaId, description: descVal };
+
+    await fetch('/api/add-description', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(description),
+    });
   }
   const logDescription = event => {
       setDescVal(event.target.value);

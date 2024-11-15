@@ -19,7 +19,7 @@ export function Create({ userName }) {
     }, []);
 
     const navigate = useNavigate();
-    const clickMedia = (med) => {
+    const clickMedia = async (med) => {
       const mediaId = media[med]; // Assuming mediaList is an object with {name: id}
       navigate('/comment', {state:{ mediaName: med, mediaId: mediaId }})
     }
