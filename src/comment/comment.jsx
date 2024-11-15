@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap';
 export function Comment() {
   // setting up variables
   const location = useLocation();
-  const { mediaName = "No Media Selected" } = location.state || {};
+  const { mediaName = "No Media Selected", mediaId = "No Id Passed" } = location.state || {};
 
   const [description, setDescription] = React.useState("");
   const [rating, setRating] = React.useState("");
