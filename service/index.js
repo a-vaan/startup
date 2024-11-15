@@ -63,7 +63,7 @@ apiRouter.get('/media', (_req, res) => {
 });
 
 // AddMedia
-apiRouter.post('/addmedia', (req, res) => {
+apiRouter.post('/add-media', (req, res) => {
   mediaList[req.body.name] = uuid.v4();
   res.send(mediaList);
 });
@@ -82,6 +82,26 @@ apiRouter.get('/description/:id', (req, res) => {
 apiRouter.post('/add-description', (req, res) => {
   descriptions[req.body.id] = req.body.description;
   res.send(descriptions);
+});
+
+// GetComments
+apiRouter.get('/comments/:id', (req, res) => {
+  const showComments = comments[req.params.id];
+  if (showComments) {
+    res.send({ showComments });
+  } else {
+    res.status(404).send({ msg: 'Comments not found' });
+  }
+});
+
+// AddComment
+apiRouter.post('/add-comment', (req, res) => {
+  if (comments[req.body.id]) {
+    comments[req.body.id].push(req.body.comment);
+  } else {
+    comments[req.body.id] = [req.body.comment];
+  }
+  res.send(comments[req.body.id]);
 });
 
 // Return the application's default page if the path is unknown
