@@ -48,12 +48,12 @@ export function Comment() {
         setComments(comments);
       })
       .catch((error) => console.error(error));
-    // fetch(`/api/rating/${mediaId}`)
-    //   .then((response) => response.json())
-    //   .then((rating) => {
-    //     setRating(rating.mediaId);
-    //   })
-    //   .catch((error) => console.error(error));
+    fetch(`/api/rating/${mediaId}`)
+      .then((response) => response.json())
+      .then((rating) => {
+        setRating(rating.averageRating);
+      })
+      .catch((error) => console.error(error));
   }, []);
 
   // putting comment rows into the correct format to be listed
@@ -69,24 +69,6 @@ export function Comment() {
         <li className="list-group-item list-group-item-dark" key={0}>Start adding comments below</li>
       );
     }
-
-  // function to save media locally
-  function updateMediaLocal(description, rating, comments) {
-    let prevMedia;
-    const newMedia = {
-      description: description,
-      rating: rating,
-      comments: comments
-    }
-    const mediaText = localStorage.getItem(`${mediaName}`);
-    if (mediaText) {
-      prevMedia = JSON.parse(mediaText);
-    }
-
-    if (newMedia !== prevMedia) {
-      localStorage.setItem(`${mediaName}`, JSON.stringify(newMedia));
-    }
-  }
 
   // code used to process values being passed into the description box
   const [descVal, setDescVal] = React.useState("");
@@ -132,13 +114,20 @@ export function Comment() {
 
   // code used to process values being passed into ratings
   const [rateVal, setRateVal] = React.useState("");
-  const updateRating = () => {
-    let newRating = rateVal;
-    if (rating) {
-      newRating = (Number(rateVal) + Number(rating))/2;
-    }
-    setRating(newRating);
-    updateMediaLocal(description, newRating, comments);
+  const updateRating = async () => {
+    const ratingBody = { id: mediaId, rating: rateVal }
+
+    await fetch('/api/add-rating', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(ratingBody),
+    });
+
+    await fetch(`/api/rating/${mediaId}`)
+      .then((response) => response.json())
+      .then((rating) => {
+        setRating(rating.averageRating);
+      })
   }
   const logRating = event => {
       setRateVal(event.target.value);
