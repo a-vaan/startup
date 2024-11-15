@@ -73,3 +73,12 @@ For this deliverable I used JavaScript and React so that the application complet
   - **WebSocket** - I used the setInterval function to periodically add a comment to the commments tab. This will be replaced with WebSocket messages later.
 - **Router** - Routing between login, create, and comment components.
 - **Hooks** - Added many hooks throughout the program, with multiple being used in app.jsx, login.jsx, create.jsx, and comment.jsx.
+
+## Service Deliverable
+For this deliverable I added backend endpoints that receives votes and returns the voting totals.
+
+- **Node.js/Express HTTP service** - done!
+- **Static middleware for frontend** - done!
+- **Calls to third party endpoints** - done! I wasn't able to get the exact third-party public endpoint to work the way I wanted, so I settled for a Kanye West quote endpoint and it does the trick!
+- **Backend service endpoints** - Placeholders for login that stores the current user on the server. Endpoints for getting and saving media items, as well as descriptions, comments, and ratings.
+- **Frontend calls service endpoints** - I did this using the fetch function.
