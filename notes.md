@@ -6677,6 +6677,3 @@ curl -b cookie.txt localhost:8080/user/me
 ```
 {"email":"지안@id.com"}
 ```
-
-
-
