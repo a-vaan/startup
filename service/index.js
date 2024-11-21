@@ -7,6 +7,10 @@ const DB = require('./database.js');
 
 const authCookieName = 'token';
 
+let descriptions = {};
+let comments = {};
+let ratings = {};
+
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -76,14 +80,16 @@ secureApiRouter.use(async (req, res, next) => {
 });
 
 // GetMediaList
-apiRouter.get('/media', (_req, res) => {
+apiRouter.get('/media', async (_req, res) => {
+  const mediaList = await DB.getMediaList();
   res.send(mediaList);
 });
 
 // AddMedia
-apiRouter.post('/add-media', (req, res) => {
-  mediaList[req.body.name] = uuid.v4();
-  res.send(mediaList);
+apiRouter.post('/add-media', async (req, res) => {
+  await DB.addMedia(req.body.name)
+  const mediaList = await DB.getMediaList();
+  res.send(mediaList)
 });
 
 // GetDescription
