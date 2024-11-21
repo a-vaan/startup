@@ -5,12 +5,7 @@ const uuid = require('uuid');
 const app = express();
 const DB = require('./database.js');
 
-// The scores and users are saved in memory and disappear whenever the service is restarted.
-let users = {};
-let mediaList = {};
-let descriptions = {};
-let comments = {};
-let ratings = {};
+const authCookieName = 'token';
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -162,6 +157,11 @@ function calculateRatings(ratingsList) {
   }
   return (total/(ratingsList.length)).toFixed(1);
 }
+
+// Default error handler
+app.use(function (err, req, res, next) {
+  res.status(500).send({ type: err.name, message: err.message });
+});
 
 // Return the application's default page if the path is unknown
 app.use((_req, res) => {
