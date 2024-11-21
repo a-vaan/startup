@@ -1,6 +1,9 @@
+const cookieParser = require('cookie-parser');
+const bcrypt = require('bcrypt');
 const express = require('express');
 const uuid = require('uuid');
 const app = express();
+const DB = require('./database.js');
 
 // The scores and users are saved in memory and disappear whenever the service is restarted.
 let users = {};
