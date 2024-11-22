@@ -82,3 +82,13 @@ For this deliverable I added backend endpoints that receives votes and returns t
 - **Calls to third party endpoints** - done! I wasn't able to get the exact third-party public endpoint to work the way I wanted, so I settled for a Kanye West quote endpoint and it does the trick!
 - **Backend service endpoints** - Placeholders for login that stores the current user on the server. Endpoints for getting and saving media items, as well as descriptions, comments, and ratings.
 - **Frontend calls service endpoints** - I did this using the fetch function.
+
+## DB/Login deliverable
+For this deliverable I stored the user and media data in the database and made accessing it contingent on logging in/creating an account.
+
+- **MongoDB Atlas database created** - done!
+- **Stores data in MongoDB** - done! All user, media, description, comment, and rating data is stored in MongoDB.
+- **User registration** - Creates a new account in the database.
+- **Existing user** - Allows the user to login if their account already exists.
+- **Use MongoDB to store credentials** - Stores both user and media data.
+- **Restricts functionality** - Functionallity and access to the database, and therefore the whole application, are both contingent on having authentication.
