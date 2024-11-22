@@ -72,6 +72,18 @@ function getComments(id) {
   return commentsCollection.findOne({ id });
 }
 
+async function addRating(ratings, id) {
+  if (!Array.isArray(ratings)) {
+    throw new Error('Invalid data type: comments must be an array');
+  }
+  await ratingsCollection.deleteOne({ id })
+  return ratingsCollection.insertOne({ ratings, id });
+}
+
+function getRating(id) {
+  return ratingsCollection.findOne({ id });
+}
+
 module.exports = {
   getUser,
   getUserByToken,
@@ -82,4 +94,6 @@ module.exports = {
   getDescription,
   addComment,
   getComments,
+  addRating,
+  getRating,
 };
