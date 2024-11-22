@@ -6,8 +6,6 @@ const DB = require('./database.js');
 
 const authCookieName = 'token';
 
-let ratings = {};
-
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -131,9 +129,10 @@ apiRouter.post('/add-comment', async (req, res) => {
 });
 
 // GetRating
-apiRouter.get('/rating/:id', (req, res) => {
-  if (ratings[req.params.id]) {
-    const averageRating = calculateRatings(ratings[req.params.id]);
+apiRouter.get('/rating/:id', async (req, res) => {
+  const ratingsObj = await DB.getRatings(req.params.id);
+  if (ratingsObj?.ratings) {
+    const averageRating = calculateRatings(ratingsObj.ratings);
     res.send({ averageRating });
   } else {
     res.status(404).send({ msg: 'Ratings not found' });
@@ -141,20 +140,23 @@ apiRouter.get('/rating/:id', (req, res) => {
 });
 
 // AddRating
-apiRouter.post('/add-rating', (req, res) => {
+apiRouter.post('/add-rating', async (req, res) => {
   const rating = Number(req.body.rating); // Convert rating to a number
 
   if (isNaN(rating)) {
     return res.status(400).send({ msg: 'Invalid rating value' });
   }
 
-  if (ratings[req.body.id]) {
-    ratings[req.body.id].push(req.body.rating);
+  const ratingsObj = await DB.getRatings(req.body.id);
+  if (ratingsObj?.ratings) {
+    let newRatings = ratingsObj.ratings;
+    newRatings.push(req.body.rating);
+    await DB.addRating(newRatings, req.body.id);
   } else {
-    ratings[req.body.id] = [req.body.rating];
+    await DB.addRating([req.body.rating], req.body.id);
   }
-
-  const averageRating = calculateRatings(ratings[req.body.id]);
+  const dbRatings = await DB.getRatings(req.body.id);
+  const averageRating = calculateRatings(dbRatings.ratings);
   res.send({ averageRating });
 });
 
