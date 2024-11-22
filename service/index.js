@@ -108,22 +108,26 @@ apiRouter.post('/add-description', async (req, res) => {
 });
 
 // GetComments
-apiRouter.get('/comments/:id', (req, res) => {
-  if (comments[req.params.id]) {
-    res.send(comments[req.params.id]);
+apiRouter.get('/comments/:id', async (req, res) => {
+  const commentsObj = await DB.getComments(req.params.id);
+  if (commentsObj?.comments) {
+    res.send(commentsObj.comments);
   } else {
     res.status(404).send({ msg: 'Comments not found' });
   }
 });
 
 // AddComment
-apiRouter.post('/add-comment', (req, res) => {
-  if (comments[req.body.id]) {
-    comments[req.body.id].push(req.body.comment);
+apiRouter.post('/add-comment', async (req, res) => {
+  const commentsObj = await DB.getComments(req.body.id);
+  if (commentsObj?.comments) {
+    const newComments = commentsObj.comments.push(req.body.comment);
+    await DB.addComment(newComments, req.body.id);
   } else {
-    comments[req.body.id] = [req.body.comment];
+    await DB.addComment([req.body.comment], req.body.id);
   }
-  res.send(comments[req.body.id]);
+  const newComments = await DB.getComments(req.body.id);
+  res.send(newComments.comments);
 });
 
 // GetRating
