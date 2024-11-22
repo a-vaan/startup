@@ -20,7 +20,7 @@ export function Create({ userName }) {
 
     const navigate = useNavigate();
     const clickMedia = async (med) => {
-      const mediaId = media[med]; // Assuming mediaList is an object with {name: id}
+      const mediaId = media[med].id;
       navigate('/comment', {state:{ mediaName: med, mediaId: mediaId }})
     }
   
@@ -31,7 +31,7 @@ export function Create({ userName }) {
       for (const med in media) {
         mediaRows.push(
           <tr key={i++}>
-            <td onClick={() => clickMedia(med)}>{med}</td>
+            <td onClick={() => clickMedia(med)}>{media[med].media}</td>
           </tr>
         );
       }

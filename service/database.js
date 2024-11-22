@@ -44,7 +44,7 @@ async function createUser(email, password) {
 }
 
 async function addMedia(media) {
-  return mediaCollection.insertOne({ [media]: uuid.v4() });
+  return mediaCollection.insertOne({ media:media, id:uuid.v4() });
 }
 
 function getMediaList() {
