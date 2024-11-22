@@ -52,11 +52,12 @@ function getMediaList() {
 }
 
 async function addDescription(description, id) {
-  return mediaCollection.insertOne({ description, id });
+  await descriptionCollection.deleteOne({ id })
+  return descriptionCollection.insertOne({ description, id });
 }
 
 function getDescription(id) {
-  return mediaCollection.findOne({ id });
+  return descriptionCollection.findOne({ id });
 }
 
 module.exports = {

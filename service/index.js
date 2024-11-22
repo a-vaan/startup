@@ -102,7 +102,6 @@ apiRouter.get('/description/:id', async (req, res) => {
 
 // AddDescription
 apiRouter.post('/add-description', async (req, res) => {
-  descriptions[req.body.id] = req.body.description;
   await DB.addDescription(req.body.description, req.body.id);
   const newDescription = await DB.getDescription(req.body.id);
   res.send(newDescription);
