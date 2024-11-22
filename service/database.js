@@ -44,11 +44,19 @@ async function createUser(email, password) {
 }
 
 async function addMedia(media) {
-  return mediaCollection.insertOne({ media:media, id:uuid.v4() });
+  return mediaCollection.insertOne({ media, id:uuid.v4() });
 }
 
 function getMediaList() {
   return mediaCollection.find({}).toArray();
+}
+
+async function addDescription(description, id) {
+  return mediaCollection.insertOne({ description, id });
+}
+
+function getDescription(id) {
+  return mediaCollection.findOne({ id });
 }
 
 module.exports = {
@@ -57,4 +65,6 @@ module.exports = {
   createUser,
   addMedia,
   getMediaList,
+  addDescription,
+  getDescription,
 };

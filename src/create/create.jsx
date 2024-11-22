@@ -21,7 +21,8 @@ export function Create({ userName }) {
     const navigate = useNavigate();
     const clickMedia = async (med) => {
       const mediaId = media[med].id;
-      navigate('/comment', {state:{ mediaName: med, mediaId: mediaId }})
+      const mediaName = media[med].media;
+      navigate('/comment', {state:{ mediaName, mediaId }})
     }
   
     // Demonstrates rendering an array with React

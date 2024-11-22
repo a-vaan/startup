@@ -6,7 +6,6 @@ const DB = require('./database.js');
 
 const authCookieName = 'token';
 
-let descriptions = {};
 let comments = {};
 let ratings = {};
 
@@ -92,19 +91,21 @@ apiRouter.post('/add-media', async (req, res) => {
 });
 
 // GetDescription
-apiRouter.get('/description/:id', (req, res) => {
-  const description = descriptions[req.params.id];
-  if (description) {
-    res.send({ description });
+apiRouter.get('/description/:id', async (req, res) => {
+  const descriptionObj = await DB.getDescription(req.params.id);
+  if (descriptionObj?.description) {
+    res.send({ description:[descriptionObj.description] });
   } else {
     res.status(404).send({ msg: 'Description not found' });
   }
 });
 
 // AddDescription
-apiRouter.post('/add-description', (req, res) => {
+apiRouter.post('/add-description', async (req, res) => {
   descriptions[req.body.id] = req.body.description;
-  res.send(descriptions);
+  await DB.addDescription(req.body.description, req.body.id);
+  const newDescription = await DB.getDescription(req.body.id);
+  res.send(newDescription);
 });
 
 // GetComments
