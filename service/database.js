@@ -60,6 +60,18 @@ function getDescription(id) {
   return descriptionCollection.findOne({ id });
 }
 
+async function addComment(comments, id) {
+  if (!Array.isArray(comments)) {
+    throw new Error('Invalid data type: comments must be an array');
+  }
+  await commentsCollection.deleteOne({ id })
+  return commentsCollection.insertOne({ comments, id });
+}
+
+function getComments(id) {
+  return commentsCollection.findOne({ id });
+}
+
 module.exports = {
   getUser,
   getUserByToken,
@@ -68,4 +80,6 @@ module.exports = {
   getMediaList,
   addDescription,
   getDescription,
+  addComment,
+  getComments,
 };

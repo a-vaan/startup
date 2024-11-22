@@ -6,7 +6,6 @@ const DB = require('./database.js');
 
 const authCookieName = 'token';
 
-let comments = {};
 let ratings = {};
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
@@ -121,13 +120,14 @@ apiRouter.get('/comments/:id', async (req, res) => {
 apiRouter.post('/add-comment', async (req, res) => {
   const commentsObj = await DB.getComments(req.body.id);
   if (commentsObj?.comments) {
-    const newComments = commentsObj.comments.push(req.body.comment);
+    let newComments = commentsObj.comments;
+    newComments.push(req.body.comment);
     await DB.addComment(newComments, req.body.id);
   } else {
     await DB.addComment([req.body.comment], req.body.id);
   }
-  const newComments = await DB.getComments(req.body.id);
-  res.send(newComments.comments);
+  const dbComments = await DB.getComments(req.body.id);
+  res.send(dbComments.comments);
 });
 
 // GetRating
