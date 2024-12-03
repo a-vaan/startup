@@ -11,29 +11,54 @@ export function Comment() {
   const [description, setDescription] = React.useState("");
   const [rating, setRating] = React.useState("");
   const [comments, setComments] = React.useState([]);
+  const [events, setEvent] = React.useState([]);
   
-  // code simulating WebSocket input
-  React.useEffect(() => {
-    let intervalId;
+  // Websocket Code
+  class UpdateEventNotifier {
+    
+    constructor() {
+      let port = window.location.port;
+      const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+      this.socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
+      this.socket.onopen = (event) => {
+        this.receiveEvent(new EventMessage('Comments', { msg: 'connected' }));
+      };
+      this.socket.onclose = (event) => {
+        this.receiveEvent(new EventMessage('Comments', { msg: 'disconnected' }));
+      };
+      this.socket.onmessage = async (msg) => {
+        try {
+          const event = JSON.parse(await msg.data.text());
+          this.receiveEvent(event);
+        } catch {}
+      };
+    }
   
-    intervalId = setInterval(async () => {
-      const commentBody = { id: mediaId, comment: "WebSocket Comment" }
-
-      await fetch('/api/add-comment', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(commentBody),
+    broadcastEvent(from, value) {
+      const event = new EventMessage(from, value);
+      this.socket.send(JSON.stringify(event));
+    }
+  
+    addHandler(handler) {
+      this.handlers.push(handler);
+    }
+  
+    removeHandler(handler) {
+      this.handlers = this.handlers.filter((h) => h !== handler);
+    }
+  
+    receiveEvent(event) {
+      this.events.push(event);
+  
+      this.events.forEach((e) => {
+        this.handlers.forEach((handler) => {
+          handler(e);
+        });
       });
-
-      await fetch(`/api/comments/${mediaId}`)
-        .then((response) => response.json())
-        .then((comments) => {
-          setComments(comments);
-        })
-    }, 10000);
+    }
+  }
   
-    return () => clearInterval(intervalId);
-  }, [comments]);
+  const UpdateNotifier = new UpdateEventNotifier();
 
   React.useEffect(() => {
     fetch(`/api/description/${mediaId}`)
@@ -54,7 +79,16 @@ export function Comment() {
         setRating(rating.averageRating);
       })
       .catch((error) => console.error(error));
+    UpdateNotifier.addHandler(handleUpdateEvent);
+
+    return () => {
+      UpdateNotifier.removeHandler(handleUpdateEvent);
+    };
   }, []);
+
+  function handleUpdateEvent(event) {
+    setEvent([...events, event]);
+  }
 
   // putting comment rows into the correct format to be listed
   let commentRows = [];
