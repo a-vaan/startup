@@ -13,17 +13,32 @@ export function Comment() {
   const [comments, setComments] = React.useState([]);
   
   // Websocket Code
+  class EventMessage {
+    constructor(comment) {
+      this.comment = comment;
+    }
+  }
+
   class UpdateCommentsNotifier {
     
     constructor() {
       const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
       this.socket = new WebSocket(`${protocol}://${window.location.hostname}:4000/ws`);
-      this.socket.onmessage = async () => {
-        await fetch(`/api/comments/${mediaId}`)
-          .then((response) => response.json())
-          .then((comments) => {
-            setComments(comments);
-          })
+      this.socket.onmessage = async (msg) => {
+        // await fetch(`/api/comments/${mediaId}`)
+        //   .then((response) => response.json())
+        //   .then((comments) => {
+        //     setComments(comments);
+        //   })
+
+        console.log("WebSocket Message Event:", msg);
+        console.log("Message Data:", msg.data);
+
+        // Extract the data from the MessageEvent
+        const newComment = msg.data;
+
+        // Append the new comment to the existing comments array
+        setComments((prevComments) => [...prevComments, newComment]);
       };
     }
   
@@ -112,7 +127,7 @@ export function Comment() {
       })
 
     // Broadcast that a new comment has been added
-    UpdateNotifier.broadcastEvent();
+    UpdateNotifier.broadcastEvent(comVal);
   }
   const logComments = event => {
       setComVal(event.target.value);
