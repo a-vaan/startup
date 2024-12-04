@@ -11,16 +11,14 @@ export function Comment() {
   const [description, setDescription] = React.useState("");
   const [rating, setRating] = React.useState("");
   const [comments, setComments] = React.useState([]);
-  const [events, setEvent] = React.useState([]);
   
   // Websocket Code
   class UpdateCommentsNotifier {
     
     constructor() {
-      let port = window.location.port;
       const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-      this.socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
-      this.socket.onmessage = async (msg) => {
+      this.socket = new WebSocket(`${protocol}://${window.location.hostname}:4000/ws`);
+      this.socket.onmessage = async () => {
         await fetch(`/api/comments/${mediaId}`)
           .then((response) => response.json())
           .then((comments) => {
@@ -55,11 +53,6 @@ export function Comment() {
         setRating(rating.averageRating);
       })
       .catch((error) => console.error(error));
-    UpdateNotifier.addHandler(handleUpdateEvent);
-
-    return () => {
-      UpdateNotifier.removeHandler(handleUpdateEvent);
-    };
   }, []);
 
   function handleUpdateEvent(event) {
