@@ -25,50 +25,59 @@ export function Comment() {
       const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
       this.socket = new WebSocket(`${protocol}://${window.location.hostname}:4000/ws`);
       this.socket.onmessage = async (msg) => {
-        // await fetch(`/api/comments/${mediaId}`)
-        //   .then((response) => response.json())
-        //   .then((comments) => {
-        //     setComments(comments);
-        //   })
-
         console.log("WebSocket Message Event:", msg);
         console.log("Message Data:", msg.data);
-
-        // Extract the data from the MessageEvent
-        const newComment = msg.data;
-
-        // Append the new comment to the existing comments array
-        setComments((prevComments) => [...prevComments, newComment]);
+        try {
+          const newComment = JSON.parse(await msg.data.text());
+          console.log("newComment:", newComment)
+          setComments((prevComments) => [...prevComments, newComment.comment]);
+        } catch {}
       };
     }
   
-    broadcastEvent() {
-      this.socket.send("New Comment");
+    broadcastEvent(comment) {
+      const event = new EventMessage(comment);
+      this.socket.send(JSON.stringify(event));
     }
   }
   
-  const UpdateNotifier = new UpdateCommentsNotifier();
+  const UpdateNotifierRef = React.useRef(null);
 
   React.useEffect(() => {
+    // Initialize WebSocket connection
+    if (!UpdateNotifierRef.current) {
+      UpdateNotifierRef.current = new UpdateCommentsNotifier();
+    }
+
+    // Fetch initial data
     fetch(`/api/description/${mediaId}`)
       .then((response) => response.json())
       .then((description) => {
         setDescription(description.description);
       })
       .catch((error) => console.error(error));
+
     fetch(`/api/comments/${mediaId}`)
       .then((response) => response.json())
       .then((comments) => {
         setComments(comments);
       })
       .catch((error) => console.error(error));
+
     fetch(`/api/rating/${mediaId}`)
       .then((response) => response.json())
       .then((rating) => {
         setRating(rating.averageRating);
       })
       .catch((error) => console.error(error));
-  }, []);
+
+    // Cleanup WebSocket connection on unmount
+    return () => {
+      if (UpdateNotifierRef.current?.socket) {
+        UpdateNotifierRef.current.socket.close();
+      }
+    };
+  }, [mediaId]);
 
   function handleUpdateEvent(event) {
     setEvent([...events, event]);
