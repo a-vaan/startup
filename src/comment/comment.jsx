@@ -25,11 +25,8 @@ export function Comment() {
       const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
       this.socket = new WebSocket(`${protocol}://${window.location.hostname}:4000/ws`);
       this.socket.onmessage = async (msg) => {
-        console.log("WebSocket Message Event:", msg);
-        console.log("Message Data:", msg.data);
         try {
           const newComment = JSON.parse(await msg.data.text());
-          console.log("newComment:", newComment)
           setComments((prevComments) => [...prevComments, newComment.comment]);
         } catch {}
       };
@@ -135,8 +132,8 @@ export function Comment() {
         setComments(comments);
       })
 
-    // Broadcast that a new comment has been added
-    UpdateNotifier.broadcastEvent(comVal);
+    // Broadcast via WebSockets that a new comment has been added
+    UpdateNotifierRef.current.broadcastEvent(comVal);
   }
   const logComments = event => {
       setComVal(event.target.value);
