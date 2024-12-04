@@ -14,7 +14,7 @@ export function Comment() {
   const [events, setEvent] = React.useState([]);
   
   // Websocket Code
-  class UpdateEventNotifier {
+  class UpdateCommentsNotifier {
     
     constructor() {
       let port = window.location.port;
@@ -29,31 +29,12 @@ export function Comment() {
       };
     }
   
-    broadcastEvent(from, value) {
-      const event = new EventMessage(from, value);
-      this.socket.send(JSON.stringify(event));
-    }
-  
-    addHandler(handler) {
-      this.handlers.push(handler);
-    }
-  
-    removeHandler(handler) {
-      this.handlers = this.handlers.filter((h) => h !== handler);
-    }
-  
-    receiveEvent(event) {
-      this.events.push(event);
-  
-      this.events.forEach((e) => {
-        this.handlers.forEach((handler) => {
-          handler(e);
-        });
-      });
+    broadcastEvent() {
+      this.socket.send("New Comment");
     }
   }
   
-  const UpdateNotifier = new UpdateEventNotifier();
+  const UpdateNotifier = new UpdateCommentsNotifier();
 
   React.useEffect(() => {
     fetch(`/api/description/${mediaId}`)
@@ -136,6 +117,9 @@ export function Comment() {
       .then((comments) => {
         setComments(comments);
       })
+
+    // Broadcast that a new comment has been added
+    UpdateNotifier.broadcastEvent();
   }
   const logComments = event => {
       setComVal(event.target.value);
