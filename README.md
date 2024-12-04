@@ -83,7 +83,7 @@ For this deliverable I added backend endpoints that receives votes and returns t
 - **Backend service endpoints** - Placeholders for login that stores the current user on the server. Endpoints for getting and saving media items, as well as descriptions, comments, and ratings.
 - **Frontend calls service endpoints** - I did this using the fetch function.
 
-## DB/Login deliverable
+## DB/Login Deliverable
 For this deliverable I stored the user and media data in the database and made accessing it contingent on logging in/creating an account.
 
 - **MongoDB Atlas database created** - done!
@@ -92,3 +92,12 @@ For this deliverable I stored the user and media data in the database and made a
 - **Existing user** - Allows the user to login if their account already exists.
 - **Use MongoDB to store credentials** - Stores both user and media data.
 - **Restricts functionality** - Functionallity and access to the database, and therefore the whole application, are both contingent on having authentication.
+
+## WebSocket Deliverable
+For this deliverable I used webSocket to update the comments on the frontend in realtime.
+
+- **Backend listens for WebSocket connection** - done!
+- **Frontend makes WebSocket connection** - done!
+- **Data sent over WebSocket connection** - done!
+- **WebSocket data displayed** - All user comments display in realtime from the WebSocket data, although they are also stored in the DB to be retrieved later if needed.
+- **All visible elements are working** - No more data is being mocked, the app is fully functional! 
