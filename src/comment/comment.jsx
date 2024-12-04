@@ -22,13 +22,20 @@ export function Comment() {
   class UpdateCommentsNotifier {
     
     constructor() {
+      let port = window.location.port;
       const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-      this.socket = new WebSocket(`${protocol}://${window.location.hostname}:4000/ws`);
+      this.socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
       this.socket.onmessage = async (msg) => {
         try {
           const newComment = JSON.parse(await msg.data.text());
-          setComments((prevComments) => [...prevComments, newComment.comment]);
-        } catch {}
+          setComments((prevComments) => {
+            // Ensure prevComments is always an array
+            const commentsArray = Array.isArray(prevComments) ? prevComments : [];
+            return [...commentsArray, newComment.comment];
+          });
+        } catch {
+          console.error("Failed to process WebSocket message");
+        }
       };
     }
   
