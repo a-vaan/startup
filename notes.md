@@ -8082,15 +8082,132 @@ Another common example of a legal wall is an application that requires the accep
   - HTTP is 80, for HTTPS is 443, and for SSH is 22
 
 ## **2. What does an HTTP status code in the range of 300/400/500 indicate?**
-  - Redirection messages ( 300 – 399 )
+  - Redirection messages/content redirects or caching ( 300 – 399 )
   - Client error responses ( 400 – 499 )
   - Server error responses ( 500 – 599 )
 
 ## **3. What does the HTTP header content-type allow you to do?**
   - The HTTP Content-Type representation header is used to indicate the original media type of a resource before any content encoding is applied.
   - The Content-Type HTTP header specifies the media type (or MIME type) of the content being sent in an HTTP request or response. It allows the client (e.g., a browser or API consumer) and the server to understand how to process the content appropriately.
+  - "language" is not a standard HTTP header.
+  - Standard HTTP headers are a set of key-value pairs used to convey important metadata about the HTTP request or response. Here’s an overview of commonly used HTTP headers:
+
+### Common HTTP Request Headers:
+1. **Host**: Specifies the domain name of the server and optionally the port number.
+   ```
+   Host: www.example.com
+   ```
+
+2. **User-Agent**: Identifies the client software making the request (e.g., web browser, mobile app).
+   ```
+   User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+   ```
+
+3. **Accept**: Indicates the media types that are acceptable for the response.
+   ```
+   Accept: text/html, application/xhtml+xml, application/xml;q=0.9, image/webp, */*;q=0.8
+   ```
+
+4. **Accept-Language**: Specifies the preferred languages for the response.
+   ```
+   Accept-Language: en-US,en;q=0.5
+   ```
+
+5. **Accept-Encoding**: Specifies the content encodings (e.g., gzip) the client can handle.
+   ```
+   Accept-Encoding: gzip, deflate, br
+   ```
+
+6. **Connection**: Indicates whether the connection should remain open or close after the transaction.
+   ```
+   Connection: keep-alive
+   ```
+
+7. **Authorization**: Provides credentials for authenticating the client with the server.
+   ```
+   Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
+   ```
+
+8. **Cookie**: Sends stored cookies to the server.
+   ```
+   Cookie: sessionid=abc123; userid=456
+   ```
+
+### Common HTTP Response Headers:
+1. **Content-Type**: Specifies the media type of the response body (e.g., HTML, JSON, image).
+   ```
+   Content-Type: text/html; charset=UTF-8
+   ```
+
+2. **Content-Length**: Specifies the size of the response body in bytes.
+   ```
+   Content-Length: 1234
+   ```
+
+3. **Server**: Provides information about the server software (e.g., Apache, Nginx).
+   ```
+   Server: Apache/2.4.41 (Unix)
+   ```
+
+4. **Location**: Used for URL redirection, specifies the URL to redirect the client to.
+   ```
+   Location: https://www.example.com/newpage
+   ```
+
+5. **Cache-Control**: Directs caching mechanisms about how to cache the response.
+   ```
+   Cache-Control: no-cache, no-store, must-revalidate
+   ```
+
+6. **Set-Cookie**: Sends cookies from the server to the client.
+   ```
+   Set-Cookie: sessionid=abc123; Path=/; HttpOnly
+   ```
+
+7. **WWW-Authenticate**: Indicates that authentication is required and provides the authentication method.
+   ```
+   WWW-Authenticate: Basic realm="Example"
+   ```
+
+8. **Date**: Represents the date and time when the message was sent.
+   ```
+   Date: Tue, 18 Dec 2024 12:00:00 GMT
+   ```
+
+9. **Content-Encoding**: Specifies the encoding used to compress the response body.
+   ```
+   Content-Encoding: gzip
+   ```
+
+10. **Strict-Transport-Security (HSTS)**: Informs browsers to always use HTTPS for future requests to the site.
+    ```
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    ```
+
+11. **Access-Control-Allow-Origin**: Part of CORS (Cross-Origin Resource Sharing), this header allows resources to be shared across different origins.
+    ```
+    Access-Control-Allow-Origin: *
+    ```
+
+12. **X-Content-Type-Options**: Prevents browsers from interpreting files as a different MIME type.
+    ```
+    X-Content-Type-Options: nosniff
+    ```
+
+13. **Transfer-Encoding**: Specifies the encoding mechanism used to transfer the message body.
+    ```
+    Transfer-Encoding: chunked
+    ```
+
+14. **Age**: Specifies the time in seconds since the response was generated.
+    ```
+    Age: 120
+    ```
+
+These headers help facilitate various aspects of HTTP communication, such as caching, security, content negotiation, and more. The exact set of headers used will depend on the needs of the application and the type of interaction between the client and server.
 
 ## **4. What does a “Secure cookie”/”Http-only cookie”/”Same-site cookie” do?**
+  - Cookies allow a server to store data on the client.
   - Secure cookie
     - Protect cookie data during transmission.
     - Definition: A cookie marked with the Secure attribute can only be sent over HTTPS connections. It ensures that the cookie data is encrypted in transit, protecting it from being intercepted by attackers via network sniffing.
@@ -8108,6 +8225,7 @@ Another common example of a legal wall is an application that requires the accep
       - None: Cookies are sent with all requests, including cross-origin requests. Requires the Secure attribute to be set.
 
 ## **5. Assuming the following Express middleware, what would be the console.log output for an HTTP GET request with a URL path of /api/document?**
+  - Middleware goes from top to bottom, only using `use` and the command type. `/*` is a wildcard and applies to any route.
   - Assumed Middleware Code
   ```
   const express = require('express');
@@ -8152,7 +8270,16 @@ Another common example of a legal wall is an application that requires the accep
     - Route Handler: This is the endpoint-specific handler for the exact path /api/document.
   Each middleware passes control to the next one using next(), and the final handler responds to the client.
 
+  - <img alt="URL Problem" src="public/URL Problem.jpg">
+    - Answer: `B`
+
 ## **6. Given the following Express service code: What does the following front end JavaScript that performs a fetch return?**
+  - Which Express middleware will match this fetch request?
+  <img alt="fetch request" src="public/what express middleware matches this fetch request.png">
+  - Answer: `app.delete(/fav\/(.*)/,() => {})`
+
+  - You can use fetch in front-end and back-end code: True
+
   - Express Service Code
   ```
   const express = require('express');
@@ -8218,6 +8345,211 @@ Another common example of a legal wall is an application that requires the accep
     The front-end fetch receives the JSON response from the server and logs it to the console. This behavior assumes no network or server errors occur.
 
 ## **7. Given the following MongoDB query, select all of the matching documents {name:Mark}**
+- MongoDB provides several search operators and functions that allow you to filter and manipulate data in queries, particularly in **full-text search** with **MongoDB Atlas Search** (powered by the **Lucene** search engine) or through regular queries. Below is a list of the key **search parameter functions** in MongoDB, divided into two categories: **Atlas Search** features and **regular MongoDB query operators**.
+
+### MongoDB Atlas Search Operators:
+MongoDB Atlas Search provides advanced full-text search capabilities. These operators are used in the `$search` stage of an aggregation pipeline.
+
+1. **`text`**: Performs a text search for a specific term or phrase.
+   ```
+   json
+   { $search: { "text": { "query": "apple", "path": "name" } } }
+   ```
+
+2. **`wildcard`**: Allows the use of wildcard patterns for matching terms.
+   ```
+   json
+   { $search: { "wildcard": { "query": "foo*", "path": "name" } } }
+   ```
+
+3. **`regex`**: Performs regular expression matching on a string field.
+   ```
+   json
+   { $search: { "regex": { "query": "^foo", "path": "name" } } }
+   ```
+
+4. **`phrase`**: Matches documents containing a phrase in a specified field.
+   ```
+   json
+   { $search: { "phrase": { "query": ["apple", "pie"], "path": "description" } } }
+   ```
+
+5. **`autocomplete`**: Performs an autocomplete search.
+   ```
+   json
+   { $search: { "autocomplete": { "query": "app", "path": "name" } } }
+   ```
+
+6. **`range`**: Performs a range query on numerical or date values.
+   ```
+   json
+   { $search: { "range": { "gte": 10, "lte": 20, "path": "price" } } }
+   ```
+
+7. **`geoNear`**: Performs a geospatial search to find documents near a point.
+   ```
+   json
+   { $search: { "geoNear": { "near": { "type": "Point", "coordinates": [ -73.97, 40.77 ] }, "distanceField": "distance", "path": "location" } } }
+   ```
+
+8. **`textScore`**: Returns the text score of the matching document.
+   ```
+   json
+   { $search: { "text": { "query": "apple", "path": "name" } }, "returnStoredSource": true }
+   ```
+
+9. **`compound`**: Combines multiple queries with logical operators (e.g., `must`, `mustNot`, `should`).
+   ```
+   json
+   { $search: { "compound": { "must": [{ "text": { "query": "apple", "path": "name" } }] } } }
+   ```
+
+10. **`score`**: Controls how the relevance score is calculated in the query.
+    ```
+    json
+    { $search: { "text": { "query": "apple", "path": "name", "score": { "boost": { "value": 2 } } } } }
+    ```
+
+11. **`highlight`**: Highlights the matched terms in the document.
+    ```
+    json
+    { $search: { "text": { "query": "apple", "path": "description", "highlight": { "path": "description" } } } }
+    ```
+
+12. **`lookup`**: Used to join search results with documents from other collections.
+    ```
+    json
+    { $search: { "lookup": { "from": "products", "localField": "product_id", "foreignField": "_id", "as": "product_details" } } }
+    ```
+
+13. **`textIndexVersion`**: Specifies the version of the text index to use for text search.
+    ```
+    json
+    { $search: { "text": { "query": "apple", "path": "name", "textIndexVersion": 3 } } }
+    ```
+
+---
+
+### MongoDB Query Operators (for regular queries):
+In addition to the search-specific operators above, MongoDB provides a rich set of query operators used for filtering and searching documents in a collection. These operators are used in standard queries, not in the `$search` stage.
+
+1. **`$eq`**: Matches values that are equal to the specified value.
+   ```
+   json
+   { "price": { "$eq": 10 } }
+   ```
+
+2. **`$ne`**: Matches values that are not equal to the specified value.
+   ```
+   json
+   { "price": { "$ne": 10 } }
+   ```
+
+3. **`$gt`**: Matches values greater than the specified value.
+   ```
+   json
+   { "price": { "$gt": 10 } }
+   ```
+
+4. **`$gte`**: Matches values greater than or equal to the specified value.
+   ```
+   json
+   { "price": { "$gte": 10 } }
+   ```
+
+5. **`$lt`**: Matches values less than the specified value.
+   ```
+   json
+   { "price": { "$lt": 10 } }
+   ```
+
+6. **`$lte`**: Matches values less than or equal to the specified value.
+   ```
+   json
+   { "price": { "$lte": 10 } }
+   ```
+
+7. **`$in`**: Matches values that are in the specified array.
+   ```
+   json
+   { "category": { "$in": ["electronics", "books"] } }
+   ```
+
+8. **`$nin`**: Matches values that are not in the specified array.
+   ```
+   json
+   { "category": { "$nin": ["electronics", "books"] } }
+   ```
+
+9. **`$exists`**: Matches documents where a field exists or does not exist.
+   ```
+   json
+   { "price": { "$exists": true } }
+   ```
+
+10. **`$regex`**: Matches documents where the field matches a regular expression.
+    ```
+    json
+    { "name": { "$regex": "^apple", "$options": "i" } }
+    ```
+
+11. **`$text`**: Performs a text search on a string field indexed with a text index.
+    ```
+    json
+    { "$text": { "$search": "apple pie" } }
+    ```
+
+12. **`$and`**: Joins multiple query conditions with a logical AND.
+    ```
+    json
+    { "$and": [{ "category": "electronics" }, { "price": { "$gte": 10 } }] }
+    ```
+
+13. **`$or`**: Joins multiple query conditions with a logical OR.
+    ```
+    json
+    { "$or": [{ "category": "electronics" }, { "category": "books" }] }
+    ```
+
+14. **`$not`**: Negates a query expression.
+    ```
+    json
+    { "price": { "$not": { "$lt": 10 } } }
+    ```
+
+15. **`$nor`**: Joins multiple query conditions with a logical NOR (not OR).
+    ```
+    json
+    { "$nor": [{ "category": "electronics" }, { "price": { "$gte": 10 } }] }
+    ```
+
+---
+
+### Geospatial Search Operators:
+These operators allow querying based on geospatial data.
+
+1. **`$geoWithin`**: Matches documents with geospatial data within a specified shape (circle, polygon).
+   ```
+   json
+   { "location": { "$geoWithin": { "$centerSphere": [[-73.97, 40.77], 1] } } }
+   ```
+
+2. **`$geoIntersects`**: Matches documents where the geospatial field intersects a specified geometry.
+   ```
+   json
+   { "location": { "$geoIntersects": { "$geometry": { "type": "Point", "coordinates": [-73.97, 40.77] } } } }
+   ```
+
+3. **`$near`**: Matches documents based on proximity to a specific geospatial point.
+   ```
+   json
+   { "location": { "$near": { "$geometry": { "type": "Point", "coordinates": [-73.97, 40.77] }, "$maxDistance": 1000 } } }
+   ```
+
+---
+
+These are some of the key functions and operators available for search and querying in MongoDB. For more advanced search capabilities, the **MongoDB Atlas Search** functionality provides a rich and flexible set of tools.
+
 - MongoDB Query Code Using Node.js and the MongoDB Driver
   ```
   const { MongoClient } = require('mongodb');
@@ -8286,6 +8618,9 @@ Another common example of a legal wall is an application that requires the accep
   - Hash and salt each password individually.
 
 ## **9. Assuming the following node.js websocket code in the back end, and the following front end websocket code, what will the front end log to the console?**
+- Given the following code what will console.log print?
+  - <img alt="WebSocket Code" src="public/Websocket Final.jpg">
+  - Answer: `Client:Server:Hello`
 - To answer this question fully, I'll provide **sample Node.js WebSocket backend code** and **corresponding front-end WebSocket code**, along with an explanation of what the front-end logs to the console.
 
 ---
@@ -8392,6 +8727,8 @@ Message from server: Hello, client!
 - Each response from the server is logged in the front-end console.
 
 ## **10. What is the websocket protocol intended to provide?**
+- What value does WebSocket add to HTTP?
+  - it is peer to peer instead of client to server
 - The WebSocket protocol is intended to provide a full-duplex communication channel over a single TCP connection, enabling real-time, bidirectional data exchange between a client (e.g., a web browser) and a server. It is designed to overcome the limitations of traditional HTTP-based communication, making it suitable for applications requiring low latency and continuous interaction.
 - The WebSocket Protocol is designed to supersede existing bidirectional communication technologies that use HTTP as a transport layer to benefit from existing infrastructure (proxies, filtering, authentication). Such technologies were implemented as trade-offs between efficiency and reliability because HTTP was not initially meant to be used for bidirectional communication (see [RFC6202] for further discussion). The WebSocket Protocol attempts to address the goals of existing bidirectional HTTP technologies in the context of the existing HTTP infrastructure; as such, it is designed to work over HTTP ports 80 and 443 as well as to support HTTP proxies and intermediaries, even if this implies some complexity specific to the current environment. However, the design does not limit WebSocket to HTTP, and future implementations could use a simpler handshake over a dedicated port without reinventing the entire protocol. This last point is important because the traffic patterns of interactive messaging do not closely match standard HTTP traffic and can induce unusual loads on some components.
 
@@ -8402,6 +8739,7 @@ Here’s what each acronym stands for:
 
 ### **JSX**: **JavaScript XML**
 - **What it is**: A syntax extension for JavaScript commonly used in React to describe the structure of UI components. It looks similar to HTML but allows embedding JavaScript expressions directly.
+- Does not combine CSS, HTML, and JavaScript
 - **Example**:
   ```jsx
   const element = <h1>Hello, World!</h1>;
@@ -8426,6 +8764,7 @@ Here’s what each acronym stands for:
 
 ### **NPM**: **Node Package Manager**
 - **What it is**: A package manager for JavaScript that helps developers share and manage libraries, dependencies, and tools for Node.js projects.
+- The code `npm install ws` does not add template code for websockets to your JavaScript
 - **Key Commands**:
   - `npm install <package>`: Installs a package.
   - `npm start`: Runs the start script defined in `package.json`.
@@ -8441,15 +8780,17 @@ Here’s what each acronym stands for:
 --- 
 
 ### Summary Table:
-| **Acronym** | **Full Form**              | **Primary Usage**                            |
+| **Acronym** | **Full Form**              | **Primary Usage**                           |
 |-------------|----------------------------|---------------------------------------------|
 | JSX         | JavaScript XML             | UI syntax for React                         |
 | JS          | JavaScript                 | Web and app development                     |
 | AWS         | Amazon Web Services        | Cloud computing                             |
-| NPM         | Node Package Manager       | Dependency management for JavaScript/Node  |
+| NPM         | Node Package Manager       | Dependency management for JavaScript/Node   |
 | NVM         | Node Version Manager       | Node.js version management                  |
 
 ## **12. Assuming an HTML document with a body element. What text content will the following React component generate?  The react component will use parameters.**
+- <img alt="React Code" src="public/react.jpg">
+  - Answer: `tacofish`
 
 ---
 
@@ -9543,3 +9884,39 @@ Here’s a breakdown of **what Vite does**:
 6. **Zero-config setup**: Easy setup with minimal configuration.
 
 **Vite** aims to **optimize** the **developer experience** by providing fast development and build tools while delivering efficient production builds for modern web applications.
+
+## **23. Misc**
+  - Which of the following is not true about a Linux daemon?
+    - Cannot fork other processes
+
+  - A **Linux daemon** is a background process that runs continuously on a Linux (or Unix-like) operating system, typically without direct interaction from the user. Daemons perform various system tasks such as handling network connections, running scheduled tasks, managing hardware devices, and providing services.
+
+### Key Characteristics of a Linux Daemon:
+1. **Background Process**: A daemon runs in the background, detached from the terminal or user interaction. It starts when the system boots up or when requested by a system manager like `systemd` or `init`.
+
+2. **No User Interface**: Daemons generally do not have a user interface and are designed to run silently in the background.
+
+3. **System Services**: Daemons typically handle system services such as file sharing, printing, web hosting, network management, or security tasks. Common examples include:
+   - `httpd` (Apache HTTP Server) for web serving.
+   - `sshd` for handling SSH connections.
+   - `cron` for scheduling tasks.
+   - `ntpd` for synchronizing time.
+
+4. **Starts Automatically**: Daemons often start automatically on system boot and may run indefinitely or for as long as they are needed to fulfill a particular task.
+
+5. **Process Naming Convention**: Daemons typically have names that end in the letter "d," which stands for "daemon." For example:
+   - `sshd` (Secure Shell Daemon)
+   - `httpd` (HTTP Daemon)
+   - `named` (DNS Daemon)
+
+### How Daemons Work:
+- **Startup**: Daemons are usually started by a system initializer like `init` or `systemd` during the boot process.
+- **Daemonization**: The process of turning a regular program into a daemon is known as "daemonization." This process involves detaching the process from the terminal and the controlling shell, ensuring it runs independently in the background.
+- **Termination**: Daemons continue to run until they are explicitly stopped (often by system administrators or through system shutdown) or until a certain condition or error occurs.
+
+### Examples of Common Daemons:
+- **`sshd`**: Provides SSH (Secure Shell) access to the system.
+- **`cron`**: Executes scheduled tasks or scripts at specific intervals.
+- **`systemd`**: A modern system and service manager in Linux that handles starting, stopping, and managing daemons and services.
+
+In summary, a **Linux daemon** is a specialized background process designed to perform specific system or application-level tasks automatically and continuously, typically without direct user intervention.
