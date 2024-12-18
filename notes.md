@@ -8078,16 +8078,19 @@ Another common example of a legal wall is an application that requires the accep
 
 
 ## Final Exam Study Guide
-1. What is the default port for HTTP/HTTPS/SSH?
+1. **What is the default port for HTTP/HTTPS/SSH?**
   - HTTP is 80, for HTTPS is 443, and for SSH is 22
-2. What does an HTTP status code in the range of 300/400/500 indicate?
+
+2. **What does an HTTP status code in the range of 300/400/500 indicate?**
   - Redirection messages ( 300 – 399 )
   - Client error responses ( 400 – 499 )
   - Server error responses ( 500 – 599 )
-3. What does the HTTP header content-type allow you to do?
+
+3. **What does the HTTP header content-type allow you to do?**
   - The HTTP Content-Type representation header is used to indicate the original media type of a resource before any content encoding is applied.
   - The Content-Type HTTP header specifies the media type (or MIME type) of the content being sent in an HTTP request or response. It allows the client (e.g., a browser or API consumer) and the server to understand how to process the content appropriately.
-4. What does a “Secure cookie”/”Http-only cookie”/”Same-site cookie” do?
+
+4. **What does a “Secure cookie”/”Http-only cookie”/”Same-site cookie” do?**
   - Secure cookie
     - Protect cookie data during transmission.
     - Definition: A cookie marked with the Secure attribute can only be sent over HTTPS connections. It ensures that the cookie data is encrypted in transit, protecting it from being intercepted by attackers via network sniffing.
@@ -8103,7 +8106,8 @@ Another common example of a legal wall is an application that requires the accep
       - Strict: Cookies are sent only for requests originating from the same site as the one that set the cookie. They are not sent for cross-site requests (e.g., embedded links or forms).
       - Lax: Cookies are sent with top-level navigations and safe HTTP methods (e.g., GET requests), but not with cross-origin embedded resources (e.g., images or iframes).
       - None: Cookies are sent with all requests, including cross-origin requests. Requires the Secure attribute to be set.
-5. Assuming the following Express middleware, what would be the console.log output for an HTTP GET request with a URL path of /api/document?
+
+5. **Assuming the following Express middleware, what would be the console.log output for an HTTP GET request with a URL path of /api/document?**
   - Assumed Middleware Code
   ```
   const express = require('express');
@@ -8147,7 +8151,8 @@ Another common example of a legal wall is an application that requires the accep
     - Middleware 2: This runs only for routes that start with /api, so it matches the requested path /api/document.
     - Route Handler: This is the endpoint-specific handler for the exact path /api/document.
   Each middleware passes control to the next one using next(), and the final handler responds to the client.
-6. Given the following Express service code: What does the following front end JavaScript that performs a fetch return?
+  
+6. **Given the following Express service code: What does the following front end JavaScript that performs a fetch return?**
 Given the following MongoDB query, select all of the matching documents {name:Mark}
 How should user passwords be stored?
 Assuming the following node.js websocket code in the back end, and the following front end websocket code, what will the front end log to the console?
