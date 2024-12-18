@@ -8078,19 +8078,19 @@ Another common example of a legal wall is an application that requires the accep
 
 
 ## Final Exam Study Guide
-1. **What is the default port for HTTP/HTTPS/SSH?**
+**1. What is the default port for HTTP/HTTPS/SSH?**
   - HTTP is 80, for HTTPS is 443, and for SSH is 22
 
-2. **What does an HTTP status code in the range of 300/400/500 indicate?**
+**2. What does an HTTP status code in the range of 300/400/500 indicate?**
   - Redirection messages ( 300 – 399 )
   - Client error responses ( 400 – 499 )
   - Server error responses ( 500 – 599 )
 
-3. **What does the HTTP header content-type allow you to do?**
+**3. What does the HTTP header content-type allow you to do?**
   - The HTTP Content-Type representation header is used to indicate the original media type of a resource before any content encoding is applied.
   - The Content-Type HTTP header specifies the media type (or MIME type) of the content being sent in an HTTP request or response. It allows the client (e.g., a browser or API consumer) and the server to understand how to process the content appropriately.
 
-4. **What does a “Secure cookie”/”Http-only cookie”/”Same-site cookie” do?**
+**4. What does a “Secure cookie”/”Http-only cookie”/”Same-site cookie” do?**
   - Secure cookie
     - Protect cookie data during transmission.
     - Definition: A cookie marked with the Secure attribute can only be sent over HTTPS connections. It ensures that the cookie data is encrypted in transit, protecting it from being intercepted by attackers via network sniffing.
@@ -8107,7 +8107,7 @@ Another common example of a legal wall is an application that requires the accep
       - Lax: Cookies are sent with top-level navigations and safe HTTP methods (e.g., GET requests), but not with cross-origin embedded resources (e.g., images or iframes).
       - None: Cookies are sent with all requests, including cross-origin requests. Requires the Secure attribute to be set.
 
-5. **Assuming the following Express middleware, what would be the console.log output for an HTTP GET request with a URL path of /api/document?**
+**5. Assuming the following Express middleware, what would be the console.log output for an HTTP GET request with a URL path of /api/document?**
   - Assumed Middleware Code
   ```
   const express = require('express');
@@ -8151,14 +8151,371 @@ Another common example of a legal wall is an application that requires the accep
     - Middleware 2: This runs only for routes that start with /api, so it matches the requested path /api/document.
     - Route Handler: This is the endpoint-specific handler for the exact path /api/document.
   Each middleware passes control to the next one using next(), and the final handler responds to the client.
-  
-6. **Given the following Express service code: What does the following front end JavaScript that performs a fetch return?**
-Given the following MongoDB query, select all of the matching documents {name:Mark}
-How should user passwords be stored?
-Assuming the following node.js websocket code in the back end, and the following front end websocket code, what will the front end log to the console?
-What is the websocket protocol intended to provide?
-What do the following acronyms stand for? JSX, JS, AWS, NPM, NVM
-Assuming an HTML document with a body element. What text content will the following React component generate?  The react component will use parameters.
+
+**6. Given the following Express service code: What does the following front end JavaScript that performs a fetch return?**
+  - Express Service Code
+  ```
+  const express = require('express');
+  const app = express();
+
+  app.use(express.json());
+
+  // Route to handle a POST request
+  app.post('/api/data', (req, res) => {
+    console.log(req.body); // Logs the incoming JSON body
+    res.json({
+      message: 'Data received successfully',
+      receivedData: req.body,
+    });
+  });
+
+  // Start the server
+  app.listen(3000, () => {
+    console.log('Server is running on port 3000');
+  });
+  ```
+  - Front-End JavaScript Fetch
+  ```
+  fetch('http://localhost:3000/api/data', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ name: 'Alice', age: 25 }),
+  })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+  ```
+  - What Happens:
+    1. The Express service listens on localhost:3000 for POST requests to /api/data.
+    2. The front-end fetch sends a POST request with JSON data: { name: 'Alice', age: 25 }.
+    3. The server logs the incoming request body:
+      ```
+      { name: 'Alice', age: 25 }
+      ```
+    4. The server responds with a JSON object:
+      ```
+      {
+        "message": "Data received successfully",
+        "receivedData": {
+          "name": "Alice",
+          "age": 25
+        }
+      }
+      ```
+    5. The front-end logs the response in the console.
+  - Front-End Console Output
+    ```
+    {
+      "message": "Data received successfully",
+      "receivedData": {
+        "name": "Alice",
+        "age": 25
+      }
+    }
+    ```
+    The front-end fetch receives the JSON response from the server and logs it to the console. This behavior assumes no network or server errors occur.
+
+**7. Given the following MongoDB query, select all of the matching documents {name:Mark}**
+- MongoDB Query Code Using Node.js and the MongoDB Driver
+  ```
+  const { MongoClient } = require('mongodb');
+
+  async function findDocuments() {
+    const uri = 'mongodb://localhost:27017'; // Replace with your MongoDB URI if different
+    const client = new MongoClient(uri);
+
+    try {
+      await client.connect();
+      const database = client.db('testDB'); // Replace 'testDB' with your database name
+      const collection = database.collection('users'); // Replace 'users' with your collection name
+
+      // Query to find all documents where name is "Mark"
+      const query = { name: 'Mark' };
+
+      // Find the matching documents
+      const results = await collection.find(query).toArray();
+
+      console.log('Matching Documents:', results);
+    } finally {
+      await client.close();
+    }
+  }
+
+  findDocuments().catch(console.error);
+  ```
+  - Explanation
+    1. Connection:
+      - MongoClient is used to connect to the MongoDB server running on localhost:27017.
+    2. Database and Collection:
+      - The database is named testDB.
+      - The collection is named users.
+    3. Query:
+      - The query object { name: 'Mark' } specifies the condition for finding documents where the field name has the value "Mark".
+    4. Retrieve Documents:
+      - collection.find(query).toArray() retrieves all matching documents as an array.
+
+  - Matching Documents
+    
+    Assume the collection contains the following documents:
+
+      ```
+      [
+        { "_id": 1, "name": "Mark", "age": 30 },
+        { "_id": 2, "name": "Mark", "age": 25 },
+        { "_id": 3, "name": "John", "age": 40 }
+      ]
+      ```
+    The query { name: 'Mark' } will return:
+      ```
+      [
+        { "_id": 1, "name": "Mark", "age": 30 },
+        { "_id": 2, "name": "Mark", "age": 25 }
+      ]
+      ```
+  - Output in Console
+    ```
+    Matching Documents: [
+      { _id: 1, name: 'Mark', age: 30 },
+      { _id: 2, name: 'Mark', age: 25 }
+    ]
+    ```
+
+**8. How should user passwords be stored?**
+  - Hash and salt each password individually.
+
+**9. Assuming the following node.js websocket code in the back end, and the following front end websocket code, what will the front end log to the console?**
+- To answer this question fully, I'll provide **sample Node.js WebSocket backend code** and **corresponding front-end WebSocket code**, along with an explanation of what the front-end logs to the console.
+
+---
+
+### **Backend: Node.js WebSocket Code**
+Using the `ws` library for WebSocket communication:
+
+```
+javascript
+const WebSocket = require('ws');
+
+const server = new WebSocket.Server({ port: 8080 });
+
+server.on('connection', (ws) => {
+  console.log('Client connected');
+
+  // Respond to messages from the client
+  ws.on('message', (message) => {
+    console.log(`Received: ${message}`);
+    if (message === 'Hello, server!') {
+      ws.send('Hello, client!');
+    } else {
+      ws.send(`You said: ${message}`);
+    }
+  });
+
+  // Send a welcome message to the client
+  ws.send('Welcome to the WebSocket server!');
+});
+```
+
+---
+
+### **Frontend: JavaScript WebSocket Code**
+```
+javascript
+const ws = new WebSocket('ws://localhost:8080');
+
+// Log messages received from the server
+ws.onmessage = (event) => {
+  console.log('Message from server:', event.data);
+};
+
+// Send a message when the WebSocket is open
+ws.onopen = () => {
+  console.log('WebSocket connection established');
+  ws.send('Hello, server!');
+};
+
+// Log errors if any occur
+ws.onerror = (error) => {
+  console.error('WebSocket error:', error);
+};
+
+// Log when the WebSocket is closed
+ws.onclose = () => {
+  console.log('WebSocket connection closed');
+};
+```
+
+---
+
+### **What Happens:**
+
+1. **Backend Behavior:**
+   - When a client connects, the backend logs:  
+     ```
+     Client connected
+     ```
+   - It sends a welcome message:  
+     `"Welcome to the WebSocket server!"`
+   - If the client sends `"Hello, server!"`, the backend replies with:  
+     `"Hello, client!"`
+
+2. **Frontend Behavior:**
+   - On opening the WebSocket connection, the client logs:  
+     ```
+     WebSocket connection established
+     ```
+   - The client sends `"Hello, server!"`.
+   - The backend responds with two messages:
+     - `"Welcome to the WebSocket server!"` (initial message)
+     - `"Hello, client!"` (response to the sent message)
+   - These messages are logged on the front end as:
+     ```
+     Message from server: Welcome to the WebSocket server!
+     Message from server: Hello, client!
+     ```
+
+---
+
+### **Frontend Console Output**
+```
+WebSocket connection established
+Message from server: Welcome to the WebSocket server!
+Message from server: Hello, client!
+```
+
+---
+
+### **Explanation**
+- The WebSocket connection establishes successfully, triggering the `onopen` event.
+- The backend sends an initial message (`Welcome to the WebSocket server!`) and responds to the client's message (`Hello, server!`).
+- Each response from the server is logged in the front-end console.
+
+**10. What is the websocket protocol intended to provide?**
+- The WebSocket protocol is intended to provide a full-duplex communication channel over a single TCP connection, enabling real-time, bidirectional data exchange between a client (e.g., a web browser) and a server. It is designed to overcome the limitations of traditional HTTP-based communication, making it suitable for applications requiring low latency and continuous interaction.
+- The WebSocket Protocol is designed to supersede existing bidirectional communication technologies that use HTTP as a transport layer to benefit from existing infrastructure (proxies, filtering, authentication). Such technologies were implemented as trade-offs between efficiency and reliability because HTTP was not initially meant to be used for bidirectional communication (see [RFC6202] for further discussion). The WebSocket Protocol attempts to address the goals of existing bidirectional HTTP technologies in the context of the existing HTTP infrastructure; as such, it is designed to work over HTTP ports 80 and 443 as well as to support HTTP proxies and intermediaries, even if this implies some complexity specific to the current environment. However, the design does not limit WebSocket to HTTP, and future implementations could use a simpler handshake over a dedicated port without reinventing the entire protocol. This last point is important because the traffic patterns of interactive messaging do not closely match standard HTTP traffic and can induce unusual loads on some components.
+
+**11. What do the following acronyms stand for? JSX, JS, AWS, NPM, NVM**
+Here’s what each acronym stands for:
+
+---
+
+### **JSX**: **JavaScript XML**
+- **What it is**: A syntax extension for JavaScript commonly used in React to describe the structure of UI components. It looks similar to HTML but allows embedding JavaScript expressions directly.
+- **Example**:
+  ```jsx
+  const element = <h1>Hello, World!</h1>;
+  ```
+
+---
+
+### **JS**: **JavaScript**
+- **What it is**: A high-level, interpreted programming language primarily used to create interactive effects and functionalities in web applications.
+- **Uses**: Web development, server-side programming (e.g., Node.js), mobile apps, and more.
+
+---
+
+### **AWS**: **Amazon Web Services**
+- **What it is**: A cloud computing platform by Amazon that offers a wide range of services such as computing power, storage, databases, and machine learning.
+- **Examples of Services**:
+  - EC2 (Elastic Compute Cloud)
+  - S3 (Simple Storage Service)
+  - Lambda (Serverless Computing)
+
+---
+
+### **NPM**: **Node Package Manager**
+- **What it is**: A package manager for JavaScript that helps developers share and manage libraries, dependencies, and tools for Node.js projects.
+- **Key Commands**:
+  - `npm install <package>`: Installs a package.
+  - `npm start`: Runs the start script defined in `package.json`.
+
+---
+
+### **NVM**: **Node Version Manager**
+- **What it is**: A tool for managing multiple versions of Node.js on a single machine. It allows developers to switch between Node.js versions easily.
+- **Key Commands**:
+  - `nvm install <version>`: Installs a specific Node.js version.
+  - `nvm use <version>`: Switches to a specific Node.js version. 
+
+--- 
+
+### Summary Table:
+| **Acronym** | **Full Form**              | **Primary Usage**                            |
+|-------------|----------------------------|---------------------------------------------|
+| JSX         | JavaScript XML             | UI syntax for React                         |
+| JS          | JavaScript                 | Web and app development                     |
+| AWS         | Amazon Web Services        | Cloud computing                             |
+| NPM         | Node Package Manager       | Dependency management for JavaScript/Node  |
+| NVM         | Node Version Manager       | Node.js version management                  |
+
+**12. Assuming an HTML document with a body element. What text content will the following React component generate?  The react component will use parameters.**
+Here’s an example test question with a React component that uses parameters (props) and a detailed explanation of the output.
+
+---
+
+### **React Component Code**
+```
+jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+function Greeting({ name, age }) {
+  return (
+    <div>
+      <h1>Hello, {name}!</h1>
+      <p>You are {age} years old.</p>
+    </div>
+  );
+}
+
+// Render the React component into the body of the HTML document
+ReactDOM.render(
+  <Greeting name="Alice" age={25} />,
+  document.body
+);
+```
+
+---
+
+### **What Happens?**
+1. **Component Behavior**:
+   - The `Greeting` component is a functional React component that takes two props: `name` and `age`.
+   - It dynamically inserts the values of these props into the rendered content using JSX:
+     - `{name}` will be replaced by `"Alice"`.
+     - `{age}` will be replaced by `25`.
+
+2. **ReactDOM Rendering**:
+   - The `ReactDOM.render()` method renders the `Greeting` component into the `body` element of the HTML document.
+   - The final DOM structure replaces the content of the `<body>` tag.
+
+---
+
+### **Generated HTML Output**
+The following HTML will be rendered in the document:
+
+```html
+<div>
+  <h1>Hello, Alice!</h1>
+  <p>You are 25 years old.</p>
+</div>
+```
+
+---
+
+### **Final Text Content**
+The text content of the rendered HTML will be:
+
+```
+Hello, Alice! You are 25 years old.
+```
+
+---
+
+### **Key Notes**
+- Props allow React components to be reusable and dynamic by passing different values for `name` and `age`.
+- The text content is the raw text after rendering, without any HTML tags. This can be verified using `document.body.textContent`.
+
 Given a set of React components that include each other, what will be generated
 What does a React component with React.useState do?
 What are React Hooks used for?
