@@ -8077,20 +8077,20 @@ Another common example of a legal wall is an application that requires the accep
 
 
 
-## Final Exam Study Guide
-**1. What is the default port for HTTP/HTTPS/SSH?**
+# Final Exam Study Guide
+## **1. What is the default port for HTTP/HTTPS/SSH?**
   - HTTP is 80, for HTTPS is 443, and for SSH is 22
 
-**2. What does an HTTP status code in the range of 300/400/500 indicate?**
+## **2. What does an HTTP status code in the range of 300/400/500 indicate?**
   - Redirection messages ( 300 – 399 )
   - Client error responses ( 400 – 499 )
   - Server error responses ( 500 – 599 )
 
-**3. What does the HTTP header content-type allow you to do?**
+## **3. What does the HTTP header content-type allow you to do?**
   - The HTTP Content-Type representation header is used to indicate the original media type of a resource before any content encoding is applied.
   - The Content-Type HTTP header specifies the media type (or MIME type) of the content being sent in an HTTP request or response. It allows the client (e.g., a browser or API consumer) and the server to understand how to process the content appropriately.
 
-**4. What does a “Secure cookie”/”Http-only cookie”/”Same-site cookie” do?**
+## **4. What does a “Secure cookie”/”Http-only cookie”/”Same-site cookie” do?**
   - Secure cookie
     - Protect cookie data during transmission.
     - Definition: A cookie marked with the Secure attribute can only be sent over HTTPS connections. It ensures that the cookie data is encrypted in transit, protecting it from being intercepted by attackers via network sniffing.
@@ -8107,7 +8107,7 @@ Another common example of a legal wall is an application that requires the accep
       - Lax: Cookies are sent with top-level navigations and safe HTTP methods (e.g., GET requests), but not with cross-origin embedded resources (e.g., images or iframes).
       - None: Cookies are sent with all requests, including cross-origin requests. Requires the Secure attribute to be set.
 
-**5. Assuming the following Express middleware, what would be the console.log output for an HTTP GET request with a URL path of /api/document?**
+## **5. Assuming the following Express middleware, what would be the console.log output for an HTTP GET request with a URL path of /api/document?**
   - Assumed Middleware Code
   ```
   const express = require('express');
@@ -8152,7 +8152,7 @@ Another common example of a legal wall is an application that requires the accep
     - Route Handler: This is the endpoint-specific handler for the exact path /api/document.
   Each middleware passes control to the next one using next(), and the final handler responds to the client.
 
-**6. Given the following Express service code: What does the following front end JavaScript that performs a fetch return?**
+## **6. Given the following Express service code: What does the following front end JavaScript that performs a fetch return?**
   - Express Service Code
   ```
   const express = require('express');
@@ -8217,7 +8217,7 @@ Another common example of a legal wall is an application that requires the accep
     ```
     The front-end fetch receives the JSON response from the server and logs it to the console. This behavior assumes no network or server errors occur.
 
-**7. Given the following MongoDB query, select all of the matching documents {name:Mark}**
+## **7. Given the following MongoDB query, select all of the matching documents {name:Mark}**
 - MongoDB Query Code Using Node.js and the MongoDB Driver
   ```
   const { MongoClient } = require('mongodb');
@@ -8282,10 +8282,10 @@ Another common example of a legal wall is an application that requires the accep
     ]
     ```
 
-**8. How should user passwords be stored?**
+## **8. How should user passwords be stored?**
   - Hash and salt each password individually.
 
-**9. Assuming the following node.js websocket code in the back end, and the following front end websocket code, what will the front end log to the console?**
+## **9. Assuming the following node.js websocket code in the back end, and the following front end websocket code, what will the front end log to the console?**
 - To answer this question fully, I'll provide **sample Node.js WebSocket backend code** and **corresponding front-end WebSocket code**, along with an explanation of what the front-end logs to the console.
 
 ---
@@ -8391,11 +8391,11 @@ Message from server: Hello, client!
 - The backend sends an initial message (`Welcome to the WebSocket server!`) and responds to the client's message (`Hello, server!`).
 - Each response from the server is logged in the front-end console.
 
-**10. What is the websocket protocol intended to provide?**
+## **10. What is the websocket protocol intended to provide?**
 - The WebSocket protocol is intended to provide a full-duplex communication channel over a single TCP connection, enabling real-time, bidirectional data exchange between a client (e.g., a web browser) and a server. It is designed to overcome the limitations of traditional HTTP-based communication, making it suitable for applications requiring low latency and continuous interaction.
 - The WebSocket Protocol is designed to supersede existing bidirectional communication technologies that use HTTP as a transport layer to benefit from existing infrastructure (proxies, filtering, authentication). Such technologies were implemented as trade-offs between efficiency and reliability because HTTP was not initially meant to be used for bidirectional communication (see [RFC6202] for further discussion). The WebSocket Protocol attempts to address the goals of existing bidirectional HTTP technologies in the context of the existing HTTP infrastructure; as such, it is designed to work over HTTP ports 80 and 443 as well as to support HTTP proxies and intermediaries, even if this implies some complexity specific to the current environment. However, the design does not limit WebSocket to HTTP, and future implementations could use a simpler handshake over a dedicated port without reinventing the entire protocol. This last point is important because the traffic patterns of interactive messaging do not closely match standard HTTP traffic and can induce unusual loads on some components.
 
-**11. What do the following acronyms stand for? JSX, JS, AWS, NPM, NVM**
+## **11. What do the following acronyms stand for? JSX, JS, AWS, NPM, NVM**
 Here’s what each acronym stands for:
 
 ---
@@ -8449,7 +8449,7 @@ Here’s what each acronym stands for:
 | NPM         | Node Package Manager       | Dependency management for JavaScript/Node  |
 | NVM         | Node Version Manager       | Node.js version management                  |
 
-**12. Assuming an HTML document with a body element. What text content will the following React component generate?  The react component will use parameters.**
+## **12. Assuming an HTML document with a body element. What text content will the following React component generate?  The react component will use parameters.**
 
 ---
 
@@ -8515,7 +8515,7 @@ Hello, Alice! You are 25 years old.
 - Props allow React components to be reusable and dynamic by passing different values for `name` and `age`.
 - The text content is the raw text after rendering, without any HTML tags. This can be verified using `document.body.textContent`.
 
-**13. Given a set of React components that include each other, what will be generated**
+## **13. Given a set of React components that include each other, what will be generated**
 
   - When React components include (or "nest") each other, the **output will be a rendered hierarchy of the components' returned JSX, forming a composite UI structure.** The exact output depends on how the components are nested and what each one renders.
 
@@ -8617,7 +8617,7 @@ I am the Grandchild component
 
 By nesting components, React allows for a modular and reusable approach to building complex UIs.
 
-**14. What does a React component with React.useState do?**
+## **14. What does a React component with React.useState do?**
   - The React useState Hook allows us to track state in a function component. State generally refers to data or properties that need to be tracking in an application.
   - A React component that uses `React.useState` implements **state management** to enable the component to track and respond to changes in data over time. It provides a way to create and manage state variables in a **functional React component**.
 
@@ -8697,7 +8697,7 @@ export default Counter;
 
 `React.useState` is a fundamental building block for creating interactive, functional React components.
 
-**15. What are React Hooks used for?**
+## **15. What are React Hooks used for?**
 
   - React Hooks are functions that let you "hook into" React state and lifecycle features from within function components. They were introduced in React 16.8 as a way to add state and other React features to functional components without having to convert them to class components.
   - React Hooks are special functions introduced in **React 16.8** that allow functional components to use features previously only available in class components, such as state management and lifecycle methods. Hooks simplify React development by enabling developers to write cleaner, more reusable, and modular code.
@@ -8758,7 +8758,7 @@ React Hooks are used to:
 
 Hooks empower developers to write React apps with fewer lines of code and a cleaner, more functional programming paradigm.
 
-**16. What does the State Hook/Context Hook/Ref Hook/Effect Hook/Performance Hook do?**
+## **16. What does the State Hook/Context Hook/Ref Hook/Effect Hook/Performance Hook do?**
 
   - State lets a component “remember” information like user input. For example, a form component can use state to store the input value, while an image gallery component can use state to store the selected image index. To add state to a component, use one of these Hooks:
     - useState declares a state variable that you can update directly.
@@ -8969,7 +8969,7 @@ React provides several hooks to optimize performance:
 
 By combining these hooks effectively, React developers can create highly efficient, clean, and maintainable applications.
 
-**17. Given React Router code, select statements that are true.**
+## **17. Given React Router code, select statements that are true.**
 - Here’s an example question involving **React Router** code and accompanying statements. The task is to write a snippet of React Router code and define which statements about it are true or false.
 
 ---
@@ -9042,7 +9042,7 @@ export default App;
 
 This type of test ensures a clear understanding of React Router’s functionality.
 
-**18. What does the package.json file do?**
+## **18. What does the package.json file do?**
 - Your package. json holds important information about the project. It contains human-readable metadata about the project (like the project name and description) as well as functional metadata like the package version number and a list of dependencies required by the application.
 - The `package.json` file is a key configuration file in Node.js projects and JavaScript applications. It provides essential information about the project and manages its dependencies, scripts, and other metadata. Here's an overview of what it does:
 
@@ -9157,7 +9157,7 @@ The `package.json` file is critical for managing a Node.js project. It:
 - Defines project metadata and scripts.
 - Simplifies sharing, installing, and maintaining your application.
 
-**19. What does the fetch function do?**
+## **19. What does the fetch function do?**
 - Here’s an example of a test question involving the `fetch` function, complete with sample code and an explanation of what `fetch` does.
 
 ---
@@ -9244,7 +9244,7 @@ fetch('https://jsonplaceholder.typicode.com/posts', {
 
 This question ensures a clear understanding of how to use `fetch` in practical applications.
 
-**20. What does node.js do?**
+## **20. What does node.js do?**
   - Node.js is a cross-platform, open-source JavaScript runtime environment that can run on Windows, Linux, Unix, macOS, and more. Node.js runs on the V8 JavaScript engine, and executes JavaScript code outside a web browser. Node.js lets developers use JavaScript to write command line tools and for server-side scripting.
   - **Node.js** is a **JavaScript runtime environment** that allows you to run JavaScript code outside the web browser, enabling the development of server-side and command-line applications. It's built on the **V8 JavaScript engine** (the same engine used by Google Chrome) and offers non-blocking, event-driven architecture, making it highly efficient for building scalable network applications.
 
@@ -9312,7 +9312,7 @@ This basic example demonstrates how to create an HTTP server that responds with 
 
 In essence, Node.js makes it possible to write scalable and high-performance server-side applications using JavaScript.
 
-**21. What does pm2 do?**
+## **21. What does pm2 do?**
   - PM2 is an open-source process manager for Node.js applications that helps with: 
     - Managing: PM2 helps manage multiple processes and ensures applications run continuously. 
     - Monitoring: PM2 monitors resources and oversees logs. You can use the pm2ls command to see a table with information about your applications, including their status, mode, PID, and restart count. 
@@ -9443,7 +9443,7 @@ In essence, Node.js makes it possible to write scalable and high-performance ser
 
 It simplifies deploying, managing, and monitoring Node.js applications, making it ideal for production use cases.
 
-**22. What does Vite do?**
+## **22. What does Vite do?**
   - Vite is a frontend tool that is used for building fast and optimized web applications. It uses a modern build system and a fast development server to provide a streamlined and efficient development experience.
   - **Vite** is a **next-generation build tool** and **development server** for modern web applications. It is designed to improve the speed and efficiency of the development process, particularly for JavaScript-based frameworks like **Vue.js**, **React**, and **Svelte**. Vite stands out for its **fast hot module replacement (HMR)**, **instant server start**, and **optimized build process**.
 
