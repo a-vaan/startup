@@ -8074,3 +8074,93 @@ A CAPTCHA is a common way to verify that a user is a human. While this may be ne
 Legal walls usually only protect the application vendor and provide little or no value to the user. GDPR inspired cookie notifications are one example of this.
 
 Another common example of a legal wall is an application that requires the acceptance of terms and conditions before you can use the application. You want to minimize the impact of legal walls as much as possible since they lessen the user's experience and encourage the user to question why a legal consent is required in the first place.
+
+
+
+## Final Exam Study Guide
+1. What is the default port for HTTP/HTTPS/SSH?
+  - HTTP is 80, for HTTPS is 443, and for SSH is 22
+2. What does an HTTP status code in the range of 300/400/500 indicate?
+  - Redirection messages ( 300 – 399 )
+  - Client error responses ( 400 – 499 )
+  - Server error responses ( 500 – 599 )
+3. What does the HTTP header content-type allow you to do?
+  - The HTTP Content-Type representation header is used to indicate the original media type of a resource before any content encoding is applied.
+  - The Content-Type HTTP header specifies the media type (or MIME type) of the content being sent in an HTTP request or response. It allows the client (e.g., a browser or API consumer) and the server to understand how to process the content appropriately.
+4. What does a “Secure cookie”/”Http-only cookie”/”Same-site cookie” do?
+  - Secure cookie
+    - Protect cookie data during transmission.
+    - Definition: A cookie marked with the Secure attribute can only be sent over HTTPS connections. It ensures that the cookie data is encrypted in transit, protecting it from being intercepted by attackers via network sniffing.
+    - Purpose: Enhances security by ensuring the cookie is not sent over an unencrypted HTTP connection.
+  - Http-only cookie
+    - Prevent client-side access to sensitive cookies.
+    - Definition: A cookie marked with the HttpOnly attribute is inaccessible to client-side scripts (like JavaScript). It can only be accessed by the server.
+    - Purpose: Protects cookies from being stolen via Cross-Site Scripting (XSS) attacks, where malicious scripts attempt to read sensitive cookies.
+  - Same-site cookie
+    - Mitigate cross-origin attacks like CSRF.
+    - Definition: The SameSite attribute restricts how cookies are sent with requests originating from external sites. It helps prevent Cross-Site Request Forgery (CSRF) attacks.
+    - Values:
+      - Strict: Cookies are sent only for requests originating from the same site as the one that set the cookie. They are not sent for cross-site requests (e.g., embedded links or forms).
+      - Lax: Cookies are sent with top-level navigations and safe HTTP methods (e.g., GET requests), but not with cross-origin embedded resources (e.g., images or iframes).
+      - None: Cookies are sent with all requests, including cross-origin requests. Requires the Secure attribute to be set.
+5. Assuming the following Express middleware, what would be the console.log output for an HTTP GET request with a URL path of /api/document?
+  - Assumed Middleware Code
+  ```
+  const express = require('express');
+  const app = express();
+
+  // Middleware 1
+  app.use((req, res, next) => {
+    console.log('Middleware 1');
+    next(); // Passes control to the next middleware
+  });
+
+  // Middleware 2
+  app.use('/api', (req, res, next) => {
+    console.log('Middleware 2');
+    next(); // Passes control to the next middleware
+  });
+
+  // Route Handler
+  app.get('/api/document', (req, res) => {
+    console.log('Route Handler');
+    res.send('Document retrieved');
+  });
+
+  // Start the server
+  app.listen(3000, () => {
+    console.log('Server is running on port 3000');
+  });
+  ```
+
+  - Expected Console Output
+  When a GET request is made to /api/document, the following will be logged to the console:
+
+  ```
+  Middleware 1
+  Middleware 2
+  Route Handler
+  ```
+
+  - Explanation
+    - Middleware 1: This runs for every request to the server because it has no specific path restriction.
+    - Middleware 2: This runs only for routes that start with /api, so it matches the requested path /api/document.
+    - Route Handler: This is the endpoint-specific handler for the exact path /api/document.
+  Each middleware passes control to the next one using next(), and the final handler responds to the client.
+6. Given the following Express service code: What does the following front end JavaScript that performs a fetch return?
+Given the following MongoDB query, select all of the matching documents {name:Mark}
+How should user passwords be stored?
+Assuming the following node.js websocket code in the back end, and the following front end websocket code, what will the front end log to the console?
+What is the websocket protocol intended to provide?
+What do the following acronyms stand for? JSX, JS, AWS, NPM, NVM
+Assuming an HTML document with a body element. What text content will the following React component generate?  The react component will use parameters.
+Given a set of React components that include each other, what will be generated
+What does a React component with React.useState do?
+What are React Hooks used for?
+What does the State Hook/Context Hook/Ref Hook/Effect Hook/Performance Hook do? https://react.dev/reference/react/hooks
+Given React Router code, select statements that are true.
+What does the package.json file do?
+What does the fetch function do?
+What does node.js do?
+What does pm2 do?
+What does Vite do?
